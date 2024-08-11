@@ -1,1 +1,3 @@
-# Estructuras-de-Datos-Canek
+# Estructuras de Datos
+## Profesor: Canek Pelaez
+
