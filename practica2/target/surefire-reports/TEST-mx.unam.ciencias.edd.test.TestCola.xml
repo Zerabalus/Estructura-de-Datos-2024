@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="27" failures="0" name="mx.unam.ciencias.edd.test.TestLista" time="0.124" errors="0" skipped="0">
+<testsuite tests="7" failures="0" name="mx.unam.ciencias.edd.test.TestCola" time="0.02" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
     <property name="java.vm.version" value="17.0.12+7-Debian-2deb12u1"/>
     <property name="sun.boot.library.path" value="/usr/lib/jvm/java-17-openjdk-amd64/lib"/>
-    <property name="maven.multiModuleProjectDirectory" value="/home/epharedam/Documentos/Estructura-de-Datos-Canek/practica1"/>
+    <property name="maven.multiModuleProjectDirectory" value="/home/epharedam/Documentos/EDD-practicas/practica2"/>
     <property name="java.vm.vendor" value="Debian"/>
     <property name="java.vendor.url" value="https://tracker.debian.org/openjdk-17"/>
     <property name="guice.disable.misplaced.annotation.check" value="true"/>
@@ -13,7 +13,7 @@
     <property name="user.country" value="MX"/>
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
-    <property name="user.dir" value="/home/epharedam/Documentos/Estructura-de-Datos-Canek/practica1"/>
+    <property name="user.dir" value="/home/epharedam/Documentos/EDD-practicas/practica2"/>
     <property name="java.vm.compressedOopsMode" value="Zero based"/>
     <property name="java.runtime.version" value="17.0.12+7-Debian-2deb12u1"/>
     <property name="os.arch" value="amd64"/>
@@ -40,7 +40,7 @@
     <property name="java.class.path" value="/usr/share/maven/boot/plexus-classworlds-2.x.jar"/>
     <property name="java.vm.specification.version" value="17"/>
     <property name="sun.arch.data.model" value="64"/>
-    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher test"/>
+    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher install"/>
     <property name="java.home" value="/usr/lib/jvm/java-17-openjdk-amd64"/>
     <property name="user.language" value="es"/>
     <property name="java.specification.vendor" value="Oracle Corporation"/>
@@ -57,31 +57,11 @@
     <property name="sun.cpu.endian" value="little"/>
     <property name="sun.stdout.encoding" value="UTF-8"/>
   </properties>
-  <testcase classname="mx.unam.ciencias.edd.test.TestLista" name="testAgregaFinal" time="0.014"/>
-  <testcase classname="mx.unam.ciencias.edd.test.TestLista" name="testElimina" time="0.002"/>
-  <testcase classname="mx.unam.ciencias.edd.test.TestLista" name="testEsVacia" time="0.001"/>
-  <testcase classname="mx.unam.ciencias.edd.test.TestLista" name="testEliminaPrimero" time="0.003"/>
-  <testcase classname="mx.unam.ciencias.edd.test.TestLista" name="testIteradorHasNext" time="0"/>
-  <testcase classname="mx.unam.ciencias.edd.test.TestLista" name="testGet" time="0.002"/>
-  <testcase classname="mx.unam.ciencias.edd.test.TestLista" name="testAgregaInicio" time="0.001"/>
-  <testcase classname="mx.unam.ciencias.edd.test.TestLista" name="testCopia" time="0.001"/>
-  <testcase classname="mx.unam.ciencias.edd.test.TestLista" name="testToString" time="0.028"/>
-  <testcase classname="mx.unam.ciencias.edd.test.TestLista" name="testIteradorStart" time="0.001"/>
-  <testcase classname="mx.unam.ciencias.edd.test.TestLista" name="testGetLongitud" time="0.001"/>
-  <testcase classname="mx.unam.ciencias.edd.test.TestLista" name="testEliminaUltimo" time="0.001"/>
-  <testcase classname="mx.unam.ciencias.edd.test.TestLista" name="testGetPrimero" time="0"/>
-  <testcase classname="mx.unam.ciencias.edd.test.TestLista" name="testContiene" time="0.001"/>
-  <testcase classname="mx.unam.ciencias.edd.test.TestLista" name="testIteradorNext" time="0"/>
-  <testcase classname="mx.unam.ciencias.edd.test.TestLista" name="testIteradorPrevious" time="0.002"/>
-  <testcase classname="mx.unam.ciencias.edd.test.TestLista" name="testIteradorEnd" time="0.001"/>
-  <testcase classname="mx.unam.ciencias.edd.test.TestLista" name="testReversa" time="0.001"/>
-  <testcase classname="mx.unam.ciencias.edd.test.TestLista" name="testGetElementos" time="0.001"/>
-  <testcase classname="mx.unam.ciencias.edd.test.TestLista" name="testIteradorHasPrevious" time="0.001"/>
-  <testcase classname="mx.unam.ciencias.edd.test.TestLista" name="testIndiceDe" time="0.002"/>
-  <testcase classname="mx.unam.ciencias.edd.test.TestLista" name="testAgrega" time="0.002"/>
-  <testcase classname="mx.unam.ciencias.edd.test.TestLista" name="testEquals" time="0.002"/>
-  <testcase classname="mx.unam.ciencias.edd.test.TestLista" name="testLimpia" time="0.001"/>
-  <testcase classname="mx.unam.ciencias.edd.test.TestLista" name="testGetUltimo" time="0.001"/>
-  <testcase classname="mx.unam.ciencias.edd.test.TestLista" name="testInserta" time="0.054"/>
-  <testcase classname="mx.unam.ciencias.edd.test.TestLista" name="testConstructor" time="0"/>
+  <testcase classname="mx.unam.ciencias.edd.test.TestCola" name="testEsVacia" time="0.007"/>
+  <testcase classname="mx.unam.ciencias.edd.test.TestCola" name="testMete" time="0"/>
+  <testcase classname="mx.unam.ciencias.edd.test.TestCola" name="testMira" time="0"/>
+  <testcase classname="mx.unam.ciencias.edd.test.TestCola" name="testSaca" time="0.001"/>
+  <testcase classname="mx.unam.ciencias.edd.test.TestCola" name="testToString" time="0.011"/>
+  <testcase classname="mx.unam.ciencias.edd.test.TestCola" name="testEquals" time="0.001"/>
+  <testcase classname="mx.unam.ciencias.edd.test.TestCola" name="testConstructor" time="0"/>
 </testsuite>
