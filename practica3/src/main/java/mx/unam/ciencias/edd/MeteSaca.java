@@ -23,6 +23,7 @@ public abstract class MeteSaca<T> {
          */
         public Nodo(T elemento) {
             // Aquí va su código.
+            this.elemento = elemento;
         }
     }
 
@@ -44,6 +45,17 @@ public abstract class MeteSaca<T> {
      */
     public T saca() {
         // Aquí va su código.
+        if(esVacia()){
+            throw new NoSuchElementException("Esta estructura esta vacia");
+        }
+        T retorno = cabeza.elemento;
+        if(cabeza.siguiente == null){
+            cabeza = null;
+            rabo = null;
+            return retorno;
+        }
+        cabeza = cabeza.siguiente;
+        return retorno;
     }
 
     /**
@@ -54,6 +66,10 @@ public abstract class MeteSaca<T> {
      */
     public T mira() {
         // Aquí va su código.
+        if (esVacia()) {
+            throw new NoSuchElementException("Esta estructura esta vacia");
+        }
+        return cabeza.elemento;
     }
 
     /**
@@ -63,6 +79,7 @@ public abstract class MeteSaca<T> {
      */
     public boolean esVacia() {
         // Aquí va su código.
+        return cabeza == null;
     }
 
     /**
@@ -77,5 +94,32 @@ public abstract class MeteSaca<T> {
             return false;
         @SuppressWarnings("unchecked") MeteSaca<T> m = (MeteSaca<T>)object;
         // Aquí va su código.
+        if(m.esVacia() && this.esVacia())
+            return true;
+        if((m.esVacia() && !this.esVacia()) || (this.esVacia() && !m.esVacia())){
+            return false;
+        }
+        Nodo nodoInt = this.cabeza;
+        Nodo nodoExt = m.cabeza;
+        while(nodoInt != null || nodoExt != null){
+            // Cuando un elemento no es igual a su equivalente en la otra estructura, cortocircuitamos a que las structs no son
+            // iguales
+            if(!nodoInt.elemento.equals(nodoExt.elemento)){
+                return false;
+            }
+            // Cuando una de las dos estructuras se puede seguir recorriendo y la otra no,
+            // entonces son de distinta longitud asi que
+            // cortocircuitamos a que no son iguales.
+            if ((nodoInt.siguiente == null && nodoExt.siguiente != null)
+                    || (nodoExt.siguiente == null && nodoInt.siguiente != null)) {
+                return false;
+            }
+            //Iteramos al siguiente
+            nodoInt = nodoInt.siguiente;
+            nodoExt = nodoExt.siguiente;
+        }
+        // Si el ciclo terminó, no ocurrió ninguno de los criterios que hacen distintas dos estructuras (longitud o elementos)
+        // entonces ambas son iguales
+        return true;
     }
 }

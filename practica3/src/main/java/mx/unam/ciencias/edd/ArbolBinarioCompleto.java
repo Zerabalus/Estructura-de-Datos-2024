@@ -19,16 +19,35 @@ public class ArbolBinarioCompleto<T> extends ArbolBinario<T> {
         /* Inicializa al iterador. */
         private Iterador() {
             // Aquí va su código.
+            cola = new Cola<Vertice>();
+            if(!esVacia())
+                cola.mete(raiz);
         }
 
         /* Nos dice si hay un elemento siguiente. */
         @Override public boolean hasNext() {
             // Aquí va su código.
+            return (!cola.esVacia());
         }
 
         /* Regresa el siguiente elemento en orden BFS. */
         @Override public T next() {
             // Aquí va su código.
+            Vertice actual = cola.saca();
+            if(actual.hayIzquierdo())
+                cola.mete((Vertice)actual.izquierdo());
+            if(actual.hayDerecho())
+                cola.mete((Vertice)actual.derecho());
+            return actual.get();
+        }
+
+        private Vertice nextNodo(){
+            Vertice actual = cola.saca();
+            if(actual.hayIzquierdo())
+                cola.mete((Vertice)actual.izquierdo());
+            if(actual.hayDerecho())
+                cola.mete((Vertice)actual.derecho());
+            return actual;
         }
     }
 
@@ -57,6 +76,42 @@ public class ArbolBinarioCompleto<T> extends ArbolBinario<T> {
      */
     @Override public void agrega(T elemento) {
         // Aquí va su código.
+        if(elemento == null)
+            throw new IllegalArgumentException();
+        //Caso trivial
+        if(esVacia()){
+            this.elementos = 1;
+            this.raiz = nuevoVertice(elemento);
+            return;
+
+        }
+        //Ahora si, la chamba
+        Vertice nuevo = nuevoVertice(elemento);
+        int coordenada = elementos+1;
+        Vertice vertice = raiz;
+
+        int[] coordenadaBinaria = new int[32];
+        int i;
+        for(i = 0; coordenada > 0 ; i++){
+            coordenadaBinaria[i] = coordenada & 1;
+            coordenada >>= 1;
+        }
+
+        for(int j = i-2; j> 0; j--){
+            if(coordenadaBinaria[j] == 0){
+                vertice = (Vertice)vertice.izquierdo();
+            }
+            else{
+                vertice = (Vertice)vertice.derecho();
+            }
+        }
+        nuevo.padre = vertice;
+        if(!vertice.hayIzquierdo())
+            vertice.izquierdo = nuevo;
+        else
+            vertice.derecho = nuevo;
+
+        elementos++;
     }
 
     /**
@@ -67,6 +122,27 @@ public class ArbolBinarioCompleto<T> extends ArbolBinario<T> {
      */
     @Override public void elimina(T elemento) {
         // Aquí va su código.
+        if(elementos == 1 && raiz.elemento.equals(elemento)){
+            limpia();
+            return;
+        }
+        if(elementos == 1 && !raiz.get().equals(elemento))
+            return;
+        Vertice target = vertice(busca(elemento));
+        Iterador iterador = (Iterador)this.iterator();
+        Vertice ultimo=raiz;
+        while(iterador.hasNext()){
+            ultimo = iterador.nextNodo();
+        }
+        target.elemento = ultimo.elemento;
+        Vertice ultimoPadre = ultimo.padre;
+        if(ultimoPadre.hayDerecho()){
+            if(ultimoPadre.derecho.equals(ultimo))
+                ultimoPadre.derecho = null;
+        }
+        else
+            ultimoPadre.izquierdo = null;
+        elementos--;
     }
 
     /**
@@ -76,6 +152,9 @@ public class ArbolBinarioCompleto<T> extends ArbolBinario<T> {
      */
     @Override public int altura() {
         // Aquí va su código.
+        if(esVacia())
+            return -1;
+        return (int)(Math.log(elementos)/Math.log(2));
     }
 
     /**
@@ -85,6 +164,16 @@ public class ArbolBinarioCompleto<T> extends ArbolBinario<T> {
      */
     public void bfs(AccionVerticeArbolBinario<T> accion) {
         // Aquí va su código.
+        Cola<Vertice> queue = new Cola<>();
+        queue.mete(raiz);
+        while(!queue.esVacia()){
+            Vertice target = queue.saca();
+            accion.actua(target);
+            if(target.hayIzquierdo())
+                queue.mete(vertice(target.izquierdo()));
+            if(target.hayDerecho())
+                queue.mete(vertice(target.derecho()));
+        }
     }
 
     /**

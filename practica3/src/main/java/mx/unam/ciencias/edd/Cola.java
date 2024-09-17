@@ -11,6 +11,13 @@ public class Cola<T> extends MeteSaca<T> {
      */
     @Override public String toString() {
         // Aquí va su código.
+        String cola = "";
+        Nodo n = cabeza;
+        while(n != null){
+            cola += n.elemento + ",";
+            n = n.siguiente;
+        }
+        return cola;
     }
 
     /**
@@ -21,5 +28,14 @@ public class Cola<T> extends MeteSaca<T> {
      */
     @Override public void mete(T elemento) {
         // Aquí va su código.
+        if (elemento == null)
+            throw new IllegalArgumentException();
+        Nodo n = new Nodo(elemento);
+        if (rabo == null) {
+            cabeza = rabo = n;
+            return;
+        }
+        rabo.siguiente = n;
+        rabo = n;
     }
 }
