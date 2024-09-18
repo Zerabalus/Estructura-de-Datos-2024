@@ -257,20 +257,36 @@ public abstract class ArbolBinario<T> implements Coleccion<T> {
      */
     public VerticeArbolBinario<T> busca(T elemento) {
         // Aquí va su código.
-        return busca(raiz, elemento);
+        if (esVacia())
+            return null;
+        if (raiz.elemento.equals(elemento))
+            return raiz();
+        return buscaAux(raiz.izquierdo, raiz.derecho, elemento);
     }
 
-    private VerticeArbolBinario<T> busca(Vertice nodo, T elemento) {
-        if(nodo == null)
+    private VerticeArbolBinario<T> buscaAux(Vertice i, Vertice d, T elemento) {
+        if (i == null && d == null)
             return null;
-        if(nodo.get().equals(elemento))
-            return nodo;
-        VerticeArbolBinario<T> izquierdo= busca(nodo.izquierdo,elemento);
-        VerticeArbolBinario<T> derecho= busca(nodo.derecho,elemento);
 
-        if(izquierdo != null)
-            return izquierdo;
-        return derecho;
+        if (i == null && d != null) {
+            if (d.elemento.equals(elemento))
+                return d;
+            return buscaAux(d.izquierdo, d.derecho, elemento);
+        }
+
+        if (i != null && d == null) {
+            if (i.elemento.equals(elemento))
+                return i;
+            return buscaAux(i.izquierdo, i.derecho, elemento);
+        }
+
+        if (i.elemento.equals(elemento))
+            return i;
+        if (d.elemento.equals(elemento))
+            return d;
+        return buscaAux(vertice(buscaAux(i.izquierdo, i.derecho, elemento)),
+                vertice(buscaAux(d.izquierdo, d.derecho, elemento)), elemento);
+
     }
 
     /**
@@ -320,7 +336,7 @@ public abstract class ArbolBinario<T> implements Coleccion<T> {
             return true;
         if(this.esVacia() != arbol.esVacia())
             return false;
-        return this.raiz.equals(arbol.raiz());
+        return raiz.equals(arbol.raiz());
     }
 
     /**
@@ -339,6 +355,8 @@ public abstract class ArbolBinario<T> implements Coleccion<T> {
     }
 
     public String toString(Vertice vertice, int nivel, int[] array){
+
+        //basado algoritmo 12.1 del libro
         String s = vertice.toString() + "\n";
         array[nivel] = 1;
         if(vertice.hayIzquierdo() && vertice.hayDerecho()){
