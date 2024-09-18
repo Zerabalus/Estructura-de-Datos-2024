@@ -80,19 +80,19 @@ public class ArbolBinarioCompleto<T> extends ArbolBinario<T> {
             Cola<Vertice> cola = new Cola<Vertice>();
             cola.mete(raiz);
             while(!(cola.esVacia())) {
-                Vertice aux = cola.saca();
-                if (aux.hayIzquierdo()) {
-                    cola.mete(aux.izquierdo);
-                } else if (!(aux.hayIzquierdo())) {
-                    aux.izquierdo = v;
-                    v.padre = aux;
+                Vertice i = cola.saca();
+                if (i.hayIzquierdo()) {
+                    cola.mete(i.izquierdo);
+                } else if (!(i.hayIzquierdo())) {
+                    i.izquierdo = v;
+                    v.padre = i;
                     return;
                 }
-                if (aux.hayDerecho()) {
-                    cola.mete(aux.derecho);
-                } else if (!(aux.hayDerecho())) {
-                    aux.derecho = v;
-                    v.padre = aux;
+                if (i.hayDerecho()) {
+                    cola.mete(i.derecho);
+                } else if (!(i.hayDerecho())) {
+                    i.derecho = v;
+                    v.padre = i;
                     return;
                 }
             }

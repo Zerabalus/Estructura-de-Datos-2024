@@ -1,7 +1,6 @@
 package mx.unam.ciencias.edd;
 
 import java.util.NoSuchElementException;
-import java.util.Iterator;
 
 /**
  * <p>Clase abstracta para árboles binarios genéricos.</p>
@@ -74,7 +73,7 @@ public abstract class ArbolBinario<T> implements Coleccion<T> {
         @Override public VerticeArbolBinario<T> padre() {
             // Aquí va su código.
             if(!hayPadre())
-                throw new NoSuchElementException("No hay padre");
+                throw new NoSuchElementException();
             return padre;
         }
 
@@ -99,7 +98,7 @@ public abstract class ArbolBinario<T> implements Coleccion<T> {
         @Override public VerticeArbolBinario<T> derecho() {
             // Aquí va su código.
             if(!hayDerecho())
-                throw new NoSuchElementException("No hay derecho");
+                throw new NoSuchElementException();
             return derecho;
         }
 
@@ -154,15 +153,15 @@ public abstract class ArbolBinario<T> implements Coleccion<T> {
             // Aquí va su código.
             if(this.elemento != vertice.get()) //Los elementos no son iguales
                 return false;
-            if(this.hayDerecho() != vertice.hayDerecho()) //Uno tiene derecho y el otro no
+            if(this.hayDerecho() != vertice.hayDerecho()) 
                 return false;
-            if(this.hayIzquierdo() != vertice.hayIzquierdo()) //Uno tiene izquierod y el otro no
+            if(this.hayIzquierdo() != vertice.hayIzquierdo()) 
                 return false;
             if(this.hayIzquierdo() && vertice.hayIzquierdo())
-                if(!this.izquierdo.equals(vertice.izquierdo())) //El izquierdo no es igual al otro izquierdo
+                if(!this.izquierdo.equals(vertice.izquierdo())) 
                     return false;
             if(this.hayDerecho() && vertice.hayDerecho())
-                if(!this.derecho.equals(vertice.derecho())) //El derecho no es igual al otro derecho
+                if(!this.derecho.equals(vertice.derecho())) 
                     return false;
             return true;
         }
@@ -196,10 +195,8 @@ public abstract class ArbolBinario<T> implements Coleccion<T> {
      */
     public ArbolBinario(Coleccion<T> coleccion) {
         // Aquí va su código.
-        Iterator<T> iterador = coleccion.iterator();
-        while (iterador.hasNext())
-            this.agrega(iterador.next());
-
+        for (T elemento : coleccion)
+            this.agrega(elemento);
     }
 
     /**
@@ -261,31 +258,31 @@ public abstract class ArbolBinario<T> implements Coleccion<T> {
             return null;
         if (raiz.elemento.equals(elemento))
             return raiz();
-        return buscaAux(raiz.izquierdo, raiz.derecho, elemento);
+        return busca(raiz.izquierdo, raiz.derecho, elemento);
     }
 
-    private VerticeArbolBinario<T> buscaAux(Vertice i, Vertice d, T elemento) {
+    private VerticeArbolBinario<T> busca(Vertice i, Vertice d, T elemento) {
         if (i == null && d == null)
             return null;
 
         if (i == null && d != null) {
             if (d.elemento.equals(elemento))
                 return d;
-            return buscaAux(d.izquierdo, d.derecho, elemento);
+            return busca(d.izquierdo, d.derecho, elemento);
         }
 
         if (i != null && d == null) {
             if (i.elemento.equals(elemento))
                 return i;
-            return buscaAux(i.izquierdo, i.derecho, elemento);
+            return busca(i.izquierdo, i.derecho, elemento);
         }
 
         if (i.elemento.equals(elemento))
             return i;
         if (d.elemento.equals(elemento))
             return d;
-        return buscaAux(vertice(buscaAux(i.izquierdo, i.derecho, elemento)),
-                vertice(buscaAux(d.izquierdo, d.derecho, elemento)), elemento);
+        return busca(vertice(busca(i.izquierdo, i.derecho, elemento)),
+                vertice(busca(d.izquierdo, d.derecho, elemento)), elemento);
 
     }
 
@@ -354,37 +351,37 @@ public abstract class ArbolBinario<T> implements Coleccion<T> {
         return toString((Vertice)raiz,0, array);
     }
 
-    public String toString(Vertice vertice, int nivel, int[] array){
+    public String toString(Vertice v, int i, int[] a){
 
         //basado algoritmo 12.1 del libro
-        String s = vertice.toString() + "\n";
-        array[nivel] = 1;
-        if(vertice.hayIzquierdo() && vertice.hayDerecho()){
-            s += dibujaEspacios(nivel, array);
+        String s = v.toString() + "\n";
+        a[i] = 1;
+        if(v.hayIzquierdo() && v.hayDerecho()){
+            s += dibujaEspacios(i, a);
             s += "├─›";
-            s += this.toString((Vertice)vertice.izquierdo(), nivel+1, array);
-            s += dibujaEspacios(nivel, array);
+            s += this.toString((Vertice)v.izquierdo(), i+1, a);
+            s += dibujaEspacios(i, a);
             s += "└─»";
-            array[nivel] = 0;
-            s += toString((Vertice)vertice.derecho(), nivel+1, array);
-        }else if(vertice.hayIzquierdo()){
-            s += dibujaEspacios(nivel, array);
+            a[i] = 0;
+            s += toString((Vertice)v.derecho(), i+1, a);
+        }else if(v.hayIzquierdo()){
+            s += dibujaEspacios(i, a);
             s += "└─›";
-            array[nivel] = 0;
-            s += toString((Vertice)vertice.izquierdo(), nivel+1, array);
+            a[i] = 0;
+            s += toString((Vertice)v.izquierdo(), i+1, a);
         }
-        else if(vertice.hayDerecho()){
-            s += dibujaEspacios(nivel, array);
+        else if(v.hayDerecho()){
+            s += dibujaEspacios(i, a);
             s += "└─»";
-            array[nivel] = 0;
-            s += toString((Vertice)vertice.derecho(), nivel + 1, array);
+            a[i] = 0;
+            s += toString((Vertice)v.derecho(), i + 1, a);
         }
         return s;
     }
 
-    public String dibujaEspacios(int l, int[] array){
+    public String dibujaEspacios(int j, int[] array){
         String s = "";
-        for(int i = 0; i<l; i++){
+        for(int i = 0; i<j; i++){
             if(array[i] == 1)
                 s += "│  ";
             else
