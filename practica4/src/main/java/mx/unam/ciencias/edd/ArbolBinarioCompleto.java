@@ -19,16 +19,26 @@ public class ArbolBinarioCompleto<T> extends ArbolBinario<T> {
         /* Inicializa al iterador. */
         private Iterador() {
             // Aquí va su código.
+            this.cola = new Cola<Vertice>();
+            if(!esVacia())
+            this.cola.mete(raiz);
         }
 
         /* Nos dice si hay un elemento siguiente. */
         @Override public boolean hasNext() {
             // Aquí va su código.
+            return !cola.esVacia();
         }
 
         /* Regresa el siguiente elemento en orden BFS. */
         @Override public T next() {
             // Aquí va su código.
+            Vertice v = cola.saca();
+            if (v.hayIzquierdo())
+                cola.mete(v.izquierdo);
+            if (v.hayDerecho())
+                cola.mete(v.derecho);
+            return v.elemento;
         }
     }
 
@@ -57,6 +67,34 @@ public class ArbolBinarioCompleto<T> extends ArbolBinario<T> {
      */
     @Override public void agrega(T elemento) {
         // Aquí va su código.
+        if (elemento == null) {
+            throw new IllegalArgumentException();
+        }
+        Vertice v = nuevoVertice(elemento);//nuevo vertice
+        elementos++;
+        if (raiz == null) {
+            raiz = v;
+        } else {
+            Cola<Vertice> cola = new Cola<Vertice>();
+            cola.mete(raiz);
+            while(!(cola.esVacia())) {
+                Vertice i = cola.saca();
+                if (i.hayIzquierdo()) {
+                    cola.mete(i.izquierdo);
+                } else if (!(i.hayIzquierdo())) {
+                    i.izquierdo = v;
+                    v.padre = i;
+                    return;
+                }
+                if (i.hayDerecho()) {
+                    cola.mete(i.derecho);
+                } else if (!(i.hayDerecho())) {
+                    i.derecho = v;
+                    v.padre = i;
+                    return;
+                }
+            }
+        }
     }
 
     /**
