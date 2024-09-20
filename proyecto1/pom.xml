@@ -4,17 +4,17 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
                              http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>mx.unam.ciencias.icc.proyecto2</groupId>
-  <artifactId>Proyecto2</artifactId>
-  <version>ICC</version>
+  <groupId>mx.unam.ciencias.edd.proyecto1</groupId>
+  <artifactId>proyecto1</artifactId>
+  <version>EDD</version>
   <packaging>jar</packaging>
 
-  <name>Proyecto 2</name>
+  <name>proyecto1</name>
   <description>
-    Proyecto 2 de Introducción a Ciencias de la Computación
+    Proyecto 1 de Estructura de Datos
   </description>
   <organization>
-    <name>Epharedam</name>
+    <name>Ephi</name>
   </organization>
 
   <properties>
@@ -67,7 +67,7 @@
 	<configuration>
 	  <archive>
 	    <manifest>
-	      <mainClass>mx.unam.ciencias.icc.proyecto2.Proyecto2</mainClass>
+	      <mainClass>mx.unam.ciencias.edd.proyecto1.proyecto1</mainClass>
 	    </manifest>
 	  </archive>
 	</configuration>
@@ -87,7 +87,7 @@
 
     </plugins>
 
-    <finalName>proyecto2</finalName>
+    <finalName>proyecto1</finalName>
   </build>
 
   <reporting>
@@ -103,8 +103,8 @@
           <author>false</author>
           <version>false</version>
           <use>true</use>
-          <windowtitle>Introducción a Ciencias de la Computación</windowtitle>
-          <doctitle><![CDATA[<h1>Introducción a Ciencias de la Computación</h1>]]></doctitle>
+          <windowtitle>Estructuras de Datos</windowtitle>
+          <doctitle><![CDATA[<h1>Estructuras de Datos</h1>]]></doctitle>
         </configuration>
       </plugin>
 

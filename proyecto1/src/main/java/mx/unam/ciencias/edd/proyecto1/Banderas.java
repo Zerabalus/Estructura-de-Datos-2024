@@ -1,7 +1,7 @@
-package mx.unam.ciencias.icc.proyecto2;
+package mx.unam.ciencias.edd.proyecto1;
 
-import mx.unam.ciencias.icc.Lista; // importa la clase lista
-import mx.unam.ciencias.icc.ExcepcionErrorBandera; //improta la excepción de las banderas
+import mx.unam.ciencias.edd.ExcepcionErrorBandera;
+import mx.unam.ciencias.edd.Lista;
 
 /**
  * Clase de las banderas 

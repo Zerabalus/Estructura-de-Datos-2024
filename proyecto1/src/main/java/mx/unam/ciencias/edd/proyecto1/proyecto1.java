@@ -1,16 +1,16 @@
-package mx.unam.ciencias.icc.proyecto2;
-
-import mx.unam.ciencias.icc.Lista; //Importa la clase lista
-import mx.unam.ciencias.icc.ExcepcionArchivoInvalido; // Importa la excepcion archivo invalido
-import mx.unam.ciencias.icc.ExcepcionErrorBandera;
+package mx.unam.ciencias.edd.proyecto1;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 
+import mx.unam.ciencias.edd.ExcepcionArchivoInvalido;
+import mx.unam.ciencias.edd.ExcepcionErrorBandera;
+import mx.unam.ciencias.edd.Lista;
+
 /**
  * Clase principal del proyetco que se encarga de leer, procesar y escribir líneas de texto
  */
-public class Proyecto2 {
+public class proyecto1 {
 
     /**
      * Imprime la salida en la terminal o la guarda en un archivo si se proporciona un nombre de archivo.
@@ -109,8 +109,8 @@ public class Proyecto2 {
         } catch (IllegalArgumentException ioe) {
             System.out.println("\nEl argumento de la bandera -o debe ir seguido de un " +
                     "nombre de archivo en el cual escribir.\n" +
-                    "Uso: java -jar proyecto2.jar -o <archivo>,\n" + 
-                    "ejemplo para más archivos:java -jar target/proyecto2.jar <archivo1> <archivo2> -r -o"+
+                    "Uso: java -jar proyecto1.jar -o <archivo>,\n" + 
+                    "ejemplo para más archivos:java -jar target/proyecto1.jar <archivo1> <archivo2> -r -o"+
                     " <prueba2archivos> \n" + 
                                                     "");
             System.exit(1);

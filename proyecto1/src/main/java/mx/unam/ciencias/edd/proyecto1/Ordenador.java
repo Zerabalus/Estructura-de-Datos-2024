@@ -1,6 +1,6 @@
-package mx.unam.ciencias.icc.proyecto2;
+package mx.unam.ciencias.edd.proyecto1;
 
-import mx.unam.ciencias.icc.Lista;
+import mx.unam.ciencias.edd.Lista;
 
 /**
  * Clase que organiza TextoPlano en un orden lexicográfico.
@@ -12,7 +12,7 @@ public class Ordenador {
     /**
      * Ordena la lista de TextoPlano lexicográficamente.
      *
-     * @param lista Lista de TextoPlano a ordenar.quie
+     * @param lista Lista de TextoPlano a ordenar.
      * @return Lista ordenada de TextoPlano.
      */
     public static Lista<TextoPlano> ordena(Lista<TextoPlano> lista) {

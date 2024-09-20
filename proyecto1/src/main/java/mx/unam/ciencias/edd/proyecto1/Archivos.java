@@ -1,7 +1,7 @@
-package mx.unam.ciencias.icc.proyecto2;
+package mx.unam.ciencias.edd.proyecto1;
 
-import mx.unam.ciencias.icc.Lista; //Importa la clase lista
-import mx.unam.ciencias.icc.ExcepcionArchivoInvalido; // Importa la excepcion archivo invalido
+import mx.unam.ciencias.edd.Lista; //Importa la clase lista
+import mx.unam.ciencias.edd.ExcepcionArchivoInvalido; // Importa la excepcion archivo invalido
 
 import java.io.InputStreamReader;
 import java.io.FileInputStream;

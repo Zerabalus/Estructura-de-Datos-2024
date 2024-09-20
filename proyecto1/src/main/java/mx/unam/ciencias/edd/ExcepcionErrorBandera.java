@@ -1,4 +1,4 @@
-package mx.unam.ciencias.icc;
+package mx.unam.ciencias.edd;
 
 public class ExcepcionErrorBandera extends IllegalArgumentException{
     /**
