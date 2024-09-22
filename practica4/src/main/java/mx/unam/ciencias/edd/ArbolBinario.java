@@ -30,6 +30,7 @@ public abstract class ArbolBinario<T> implements Coleccion<T> {
          */
         protected Vertice(T elemento) {
             // Aquí va su código.
+            this.elemento = elemento;
         }
 
         /**
@@ -39,6 +40,7 @@ public abstract class ArbolBinario<T> implements Coleccion<T> {
          */
         @Override public boolean hayPadre() {
             // Aquí va su código.
+            return (this.padre != null);
         }
 
         /**
@@ -48,6 +50,7 @@ public abstract class ArbolBinario<T> implements Coleccion<T> {
          */
         @Override public boolean hayIzquierdo() {
             // Aquí va su código.
+            return (this.izquierdo != null);
         }
 
         /**
@@ -57,6 +60,7 @@ public abstract class ArbolBinario<T> implements Coleccion<T> {
          */
         @Override public boolean hayDerecho() {
             // Aquí va su código.
+            return (this.derecho != null);
         }
 
         /**
@@ -66,6 +70,10 @@ public abstract class ArbolBinario<T> implements Coleccion<T> {
          */
         @Override public VerticeArbolBinario<T> padre() {
             // Aquí va su código.
+            if (!hayPadre())
+                throw new NoSuchElementException();
+
+            return this.padre;
         }
 
         /**
