@@ -105,6 +105,40 @@ public class ArbolBinarioCompleto<T> extends ArbolBinario<T> {
      */
     @Override public void elimina(T elemento) {
         // Aquí va su código.
+        //ayudantía liz
+        Vertice eliminar = (ArbolBinario<T>.Vertice) busca(elemento);
+        if (eliminar == null) {
+            return;
+        }
+        elementos = elementos - 1;
+        if (elementos == 0) {
+            raiz = null;
+            return;
+        }
+        Cola<Vertice> cola = new Cola<Vertice>();
+        Vertice v = raiz;
+        cola.mete(v);
+        while (!(cola.esVacia())) {
+            Vertice e = cola.saca();
+            if (!(e.hayDerecho()) && !(e.hayIzquierdo()) && cola.esVacia()) {
+                v = e;
+            }
+            if (e.hayIzquierdo()) {
+                cola.mete(e.izquierdo);
+            }
+            if (e.hayDerecho()) {
+                cola.mete(e.derecho);
+            }
+        }
+        T elimina = v.elemento;
+        v.elemento = eliminar.elemento;
+        eliminar.elemento = elimina;
+        if (v.padre.izquierdo.elemento.equals(elemento)) {
+            v.padre.izquierdo = null;
+        } else {
+            v.padre.derecho = null;
+        }
+        v.padre = null;
     }
 
     /**
@@ -114,6 +148,8 @@ public class ArbolBinarioCompleto<T> extends ArbolBinario<T> {
      */
     @Override public int altura() {
         // Aquí va su código.
+        if (elementos == 0) return -1;
+        return raiz.altura();
     }
 
     /**
@@ -123,6 +159,19 @@ public class ArbolBinarioCompleto<T> extends ArbolBinario<T> {
      */
     public void bfs(AccionVerticeArbolBinario<T> accion) {
         // Aquí va su código.
+        if (raiz == null) {
+            return;
+        }
+        Cola<Vertice> cola = new Cola<>();
+        cola.mete(raiz);
+        while(!cola.esVacia()){
+            Vertice v = cola.saca();
+            accion.actua(v);
+            if(v.hayIzquierdo())
+                cola.mete(vertice(v.izquierdo()));
+            if(v.hayDerecho())
+                cola.mete(vertice(v.derecho()));
+        }
     }
 
     /**
