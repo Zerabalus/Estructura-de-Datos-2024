@@ -40,7 +40,7 @@ public abstract class ArbolBinario<T> implements Coleccion<T> {
          */
         @Override public boolean hayPadre() {
             // Aquí va su código.
-            return (this.padre != null);
+            return this.padre != null;
         }
 
         /**
@@ -50,7 +50,7 @@ public abstract class ArbolBinario<T> implements Coleccion<T> {
          */
         @Override public boolean hayIzquierdo() {
             // Aquí va su código.
-            return (this.izquierdo != null);
+            return this.izquierdo != null;
         }
 
         /**
@@ -60,7 +60,7 @@ public abstract class ArbolBinario<T> implements Coleccion<T> {
          */
         @Override public boolean hayDerecho() {
             // Aquí va su código.
-            return (this.derecho != null);
+            return this.derecho != null;
         }
 
         /**
@@ -104,7 +104,6 @@ public abstract class ArbolBinario<T> implements Coleccion<T> {
             if(uno > dos)
                 return uno;
             return dos;
-            }
         }
 
         /**
@@ -172,6 +171,7 @@ public abstract class ArbolBinario<T> implements Coleccion<T> {
         @Override public String toString() {
             // Aquí va su código.
             return elemento.toString();
+        }
     }
 
     /** La raíz del árbol. */

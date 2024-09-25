@@ -106,6 +106,26 @@ public class ArbolRojinegro<T extends Comparable<T>>
      */
     @Override public void agrega(T elemento) {
         // Aquí va su código.
+        private void balancea(VerticeRojinegro vertice) {
+            
+        }
+        //cuando la raíz es roja
+        private boolean esRojo(Vertice vertice) {
+            return (vertice != null &&
+            vertice.color == Color.ROJO);
+        }   
+        //cuando la raíz es negra
+        //null 
+        //abuelo get padre
+        //tio get hermano tio rojo if colorea padre negro tio rojo, rebalncea y return
+
+        private VerticeRojinegro getHermano(VerticeRojinegro vertice) {
+        //izq porque crece asi ahi casteamos if else operador ternario
+            return esIzquierdo(vertice) ? 
+            (VerticeRojinegro)vertice.padre.derecho : (vertice.padre != null) ? 
+            (VerticeRojinegro)vertice.padre.izquierdo : null;
+        }
+
     }
 
     /**
