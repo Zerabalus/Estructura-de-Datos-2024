@@ -16,6 +16,6 @@ const info = {
 };
 
 ```
-<img src="https://i.pinimg.com/564x/53/ff/a4/53ffa44130f027950999c450fde63414.jpg" alt="<3" align="center" width="40%" height="30%">
+
 
 
