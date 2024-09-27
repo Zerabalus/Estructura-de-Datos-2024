@@ -1,12 +1,21 @@
+<img src="https://i.pinimg.com/736x/7a/38/21/7a382162b05144212f0ff14435b3ade9.jpg" alt="<3" align= "left" width="30%" height="30%">
 
+
+```zsh
+Ephi@EDD: ~/my_readme $ neofetch
+```
 ```javascript
 const info = {
   Asignatura: "Estructura de Datos",
+------------------------------------------
   Semestre: 2025-1,
   Profesor: "Canek Pélaez",
-  Referencias: "Peláez, Canek: Estructuras de Datos con Java Moderno: Comportamiento + Objetos = Programas",
+  Referencias: "Peláez, Canek:
+  Estructuras de Datos con Java Moderno:
+  Comportamiento + Objetos = Programas",
 };
 
 ```
-<a<img src="https://64.media.tumblr.com/a2c7c6bd77de6fc0939a4429854f289b/2c941dd21660cbf4-a4/s1280x1920/106469df6f6080188acbe0a56e29aef0ac25ed77.jpg" alt="<3" width="50%" height="20%">
-</a>
+<img src="https://i.pinimg.com/564x/53/ff/a4/53ffa44130f027950999c450fde63414.jpg" alt="<3" align="center" width="40%" height="30%">
+
+
