@@ -32,6 +32,8 @@ public class ArbolRojinegro<T extends Comparable<T>>
          */
         public VerticeRojinegro(T elemento) {
             // Aquí va su código.
+            super(elemento);
+            color = Color.NINGUNO;
         }
 
         /**
@@ -40,6 +42,8 @@ public class ArbolRojinegro<T extends Comparable<T>>
          */
         @Override public String toString() {
             // Aquí va su código.
+            return String.format("%s{%s}",
+            color == Color.ROJO ? "R" : "N", elemento.toString());
         }
 
         /**
@@ -58,6 +62,7 @@ public class ArbolRojinegro<T extends Comparable<T>>
             @SuppressWarnings("unchecked")
                 VerticeRojinegro vertice = (VerticeRojinegro)objeto;
             // Aquí va su código.
+            return color == vertice.color && super.equals(objeto);
         }
     }
 
@@ -75,6 +80,7 @@ public class ArbolRojinegro<T extends Comparable<T>>
      */
     public ArbolRojinegro(Coleccion<T> coleccion) {
         // Aquí va su código.
+        super(coleccion);
     }
 
     /**
@@ -85,6 +91,7 @@ public class ArbolRojinegro<T extends Comparable<T>>
      */
     @Override protected Vertice nuevoVertice(T elemento) {
         // Aquí va su código.
+        return new VerticeRojinegro(elemento);
     }
 
     /**
@@ -96,6 +103,7 @@ public class ArbolRojinegro<T extends Comparable<T>>
      */
     public Color getColor(VerticeArbolBinario<T> vertice) {
         // Aquí va su código.
+        return verticeRojinegro(vertice).color;
     }
 
     /**
