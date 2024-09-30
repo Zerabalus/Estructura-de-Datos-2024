@@ -40,7 +40,8 @@ public abstract class ArbolBinario<T> implements Coleccion<T> {
          */
         @Override public boolean hayPadre() {
             // Aquí va su código.
-            return this.padre != null;
+            return (this.padre != null);
+
         }
 
         /**
@@ -61,6 +62,7 @@ public abstract class ArbolBinario<T> implements Coleccion<T> {
         @Override public boolean hayDerecho() {
             // Aquí va su código.
             return this.derecho != null;
+
         }
 
         /**
@@ -70,10 +72,9 @@ public abstract class ArbolBinario<T> implements Coleccion<T> {
          */
         @Override public VerticeArbolBinario<T> padre() {
             // Aquí va su código.
-            if (!hayPadre())
+            if(!hayPadre())
                 throw new NoSuchElementException();
-
-            return this.padre;
+            return padre;
         }
 
         /**
@@ -81,7 +82,8 @@ public abstract class ArbolBinario<T> implements Coleccion<T> {
          * @return el izquierdo del vértice.
          * @throws NoSuchElementException si el vértice no tiene izquierdo.
          */
-        @Override public VerticeArbolBinario<T> izquierdo() {
+        @Override
+        public VerticeArbolBinario<T> izquierdo() {
             // Aquí va su código.
             if (!hayIzquierdo())
                 throw new NoSuchElementException();
@@ -171,6 +173,7 @@ public abstract class ArbolBinario<T> implements Coleccion<T> {
         @Override public String toString() {
             // Aquí va su código.
             return elemento.toString();
+            
         }
     }
 
@@ -331,7 +334,6 @@ public abstract class ArbolBinario<T> implements Coleccion<T> {
         if(this.esVacia() != arbol.esVacia())
             return false;
         return raiz.equals(arbol.raiz());
-        
     }
 
     /**
@@ -340,50 +342,45 @@ public abstract class ArbolBinario<T> implements Coleccion<T> {
      */
     @Override public String toString() {
         // Aquí va su código.
-        if(esVacia())
+        if(raiz==null)
             return "";
-        int[]array = new int[altura()+1];
-        for(int i = 0; i<array.length; i++){
-            array[i] = 0;
-        }
-        return toString((Vertice)raiz,0, array);
+        int[] arr=new int[altura()+1];
+        for(int i=0; i<altura()+1; i++)
+            arr[i]=0;
+        return auxString(raiz,0,arr);
     }
-
-    public String toString(Vertice v, int i, int[] a){
-
-        //basado algoritmo 12.1 del libro
-        String s = v.toString() + "\n";
-        a[i] = 1;
-        if(v.hayIzquierdo() && v.hayDerecho()){
-            s += dibujaEspacios(i, a);
-            s += "├─›";
-            s += this.toString((Vertice)v.izquierdo(), i+1, a);
-            s += dibujaEspacios(i, a);
-            s += "└─»";
-            a[i] = 0;
-            s += toString((Vertice)v.derecho(), i+1, a);
-        }else if(v.hayIzquierdo()){
-            s += dibujaEspacios(i, a);
-            s += "└─›";
-            a[i] = 0;
-            s += toString((Vertice)v.izquierdo(), i+1, a);
-        }
-        else if(v.hayDerecho()){
-            s += dibujaEspacios(i, a);
-            s += "└─»";
-            a[i] = 0;
-            s += toString((Vertice)v.derecho(), i + 1, a);
-        }
+    private String dibujaEspacios(int nivel,int[] arr){
+        String s="";
+        for(int i=0; i<=(nivel-1); i++)
+            if(arr[i]==1)
+                s+="│  ";
+            else
+                s+="   ";
         return s;
     }
+    private String auxString(Vertice v, int nivel, int [] a){
+        String s=v.toString()+"\n";
+        a[nivel]=1;
 
-    public String dibujaEspacios(int j, int[] array){
-        String s = "";
-        for(int i = 0; i<j; i++){
-            if(array[i] == 1)
-                s += "│  ";
-            else
-                s += "   ";
+        if(v.izquierdo !=null && v.derecho !=null){
+            s+=dibujaEspacios(nivel, a);
+            s+="├─›";
+            s+=auxString(v.izquierdo, nivel+1, a);
+            s+=dibujaEspacios(nivel, a);
+            s+="└─»";
+            a[nivel]=0;
+            s+=auxString(v.derecho,nivel+1, a);
+        }
+        else if(v.izquierdo !=null){
+            s+=dibujaEspacios(nivel, a);
+            s+= "└─›";
+            a[nivel]=0;
+            s+=auxString(v.izquierdo, nivel+1,a);
+        }else if(v.derecho !=null){
+            s+=dibujaEspacios(nivel, a);
+            s+= "└─»"; 
+            a[nivel]=0;
+            s+=auxString(v.derecho, nivel+1,a);
         }
         return s;
     }

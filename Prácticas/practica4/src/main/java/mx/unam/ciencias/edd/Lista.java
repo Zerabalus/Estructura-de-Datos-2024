@@ -86,6 +86,7 @@ public class Lista<T> implements Coleccion<T> {
             // Aquí va su código.
             anterior = null;
             siguiente = cabeza;
+
         }
 
         /* Mueve el iterador al final de la lista. */
@@ -559,7 +560,7 @@ public class Lista<T> implements Coleccion<T> {
      */
     public static <T extends Comparable<T>>
     Lista<T> mergeSort(Lista<T> lista) {
-        return lista.mergeSort((a, b) -> a.compareTo(b));
+        return lista.mergeSort((a, b) -> a.compareTo(b));    
     }
 
     /**

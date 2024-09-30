@@ -1,6 +1,7 @@
 package mx.unam.ciencias.edd;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 /**
  * <p>Clase para árboles binarios completos.</p>
@@ -27,13 +28,14 @@ public class ArbolBinarioCompleto<T> extends ArbolBinario<T> {
         /* Nos dice si hay un elemento siguiente. */
         @Override public boolean hasNext() {
             // Aquí va su código.
-            return !cola.esVacia();
+            return (!cola.esVacia());
         }
 
         /* Regresa el siguiente elemento en orden BFS. */
         @Override public T next() {
             // Aquí va su código.
-            Vertice v = cola.saca();
+            if (!hasNext()) throw new NoSuchElementException();
+                Vertice v = cola.saca();
             if (v.hayIzquierdo())
                 cola.mete(v.izquierdo);
             if (v.hayDerecho())
@@ -70,7 +72,7 @@ public class ArbolBinarioCompleto<T> extends ArbolBinario<T> {
         if (elemento == null) {
             throw new IllegalArgumentException();
         }
-        Vertice v = nuevoVertice(elemento);//nuevo vertice
+        Vertice v = nuevoVertice(elemento);
         elementos++;
         if (raiz == null) {
             raiz = v;

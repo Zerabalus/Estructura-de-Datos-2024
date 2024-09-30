@@ -159,9 +159,9 @@ public class ArbolBinarioOrdenado<T extends Comparable<T>>
     protected Vertice intercambiaEliminable(Vertice vertice) {
         // Aquí va su código.
         Vertice maximo = maximoEnSubarbol(vertice.izquierdo);
-        T jaja = vertice.elemento;
+        T e = vertice.elemento;
         vertice.elemento = maximo.elemento;
-        maximo.elemento = jaja;
+        maximo.elemento = e;
         return maximo;
     }
 
@@ -173,7 +173,7 @@ public class ArbolBinarioOrdenado<T extends Comparable<T>>
      */
     protected void eliminaVertice(Vertice vertice) {
         // Aquí va su código.
-        Vertice hijo = (vertice.hayIzquierdo()? vertice.izquierdo : vertice.derecho);
+         Vertice hijo = (vertice.hayIzquierdo()? vertice.izquierdo : vertice.derecho);
         if(!vertice.hayPadre()){
             raiz = hijo;
         }else{
@@ -210,6 +210,7 @@ public class ArbolBinarioOrdenado<T extends Comparable<T>>
             return busca(v.izquierdo, elemento);
         else
             return busca(v.derecho, elemento);
+
     }
 
     /**
@@ -234,28 +235,28 @@ public class ArbolBinarioOrdenado<T extends Comparable<T>>
      */
     public void giraDerecha(VerticeArbolBinario<T> vertice) {
         // Aquí va su código.
-        Vertice q = vertice(vertice); // q para que coincida con el libro
-        if (q == null || !q.hayIzquierdo())
+        if(vertice == null || !vertice.hayIzquierdo())
             return;
-        //si pasamos la verificacion entonces existe el hijo izq de q y p sera el hijo izq de q
-        Vertice p = vertice(vertice.izquierdo());
-        q.izquierdo = p.derecho;
 
+        Vertice casteado = vertice(vertice);
+        Vertice nuevoPadre = vertice(vertice.izquierdo());
+        casteado.izquierdo = nuevoPadre.derecho;
 
-        if (p.hayDerecho()) {
-            p.derecho.padre = q;
+        if(nuevoPadre.hayDerecho()){
+            nuevoPadre.derecho.padre = casteado;
         }
-        p.derecho = q;
-        p.padre = q.padre;
-        q.padre = p;
+        nuevoPadre.derecho = casteado;
+        nuevoPadre.padre = casteado.padre;
+        casteado.padre = nuevoPadre;
 
-        if (p.hayPadre()) {
-            if (p.padre.hayIzquierdo() && p.padre.izquierdo.get().equals(q.get()))
-                p.padre.izquierdo = p;
-            else if (p.padre.hayDerecho() && p.padre.derecho.get().equals(q.get()))
-                p.padre.derecho = p;
-        } else
-            this.raiz = p;
+        if(nuevoPadre.hayPadre()){
+
+            if(nuevoPadre.padre.hayIzquierdo() && nuevoPadre.padre.izquierdo == casteado)
+                nuevoPadre.padre.izquierdo = nuevoPadre;
+            else if (nuevoPadre.padre.hayDerecho() && nuevoPadre.padre.derecho == casteado)
+                nuevoPadre.padre.derecho = nuevoPadre;
+        }else
+            this.raiz = nuevoPadre; 
     }
 
     /**

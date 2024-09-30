@@ -46,7 +46,6 @@ public class Arreglos {
         intercambia(arreglo, ini, i);
         quickSort(arreglo, ini, i - 1, comparador);
         quickSort(arreglo, i + 1, fin, comparador);
-        
     }
 
     /**
