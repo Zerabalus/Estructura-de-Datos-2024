@@ -12,12 +12,12 @@ public class Cola<T> extends MeteSaca<T> {
     @Override public String toString() {
         // Aquí va su código.
         Nodo n=cabeza;
-        String r="";
+        String cola="";
         while(n !=null){
-            r+=n.elemento.toString()+",";
+            cola+=n.elemento.toString()+",";
             n=n.siguiente;
         }
-        return r;
+        return cola;
     }
 
     /**
@@ -26,16 +26,17 @@ public class Cola<T> extends MeteSaca<T> {
      * @throws IllegalArgumentException si <code>elemento</code> es
      *         <code>null</code>.
      */
-    @Override public void mete(T elemento) {
+    @Override
+    public void mete(T elemento) {
         // Aquí va su código.
         if (elemento == null)
-            throw new IllegalArgumentException("El elemento ingresado es nulo");
+            throw new IllegalArgumentException();
         Nodo n = new Nodo(elemento);
         if (rabo == null) {
             cabeza = rabo = n;
-        } else {
-            rabo.siguiente = n;
-            rabo = n;
+            return;
         }
+        rabo.siguiente = n;
+        rabo = n;
     }
 }
