@@ -238,22 +238,22 @@ public class ArbolBinarioOrdenado<T extends Comparable<T>>
         if(vertice == null || !vertice.hayIzquierdo())
             return;
 
-        Vertice casteado = vertice(vertice);
+        Vertice n = vertice(vertice);
         Vertice nuevoPadre = vertice(vertice.izquierdo());
-        casteado.izquierdo = nuevoPadre.derecho;
+        n.izquierdo = nuevoPadre.derecho;
 
         if(nuevoPadre.hayDerecho()){
-            nuevoPadre.derecho.padre = casteado;
+            nuevoPadre.derecho.padre = n;
         }
-        nuevoPadre.derecho = casteado;
-        nuevoPadre.padre = casteado.padre;
-        casteado.padre = nuevoPadre;
+        nuevoPadre.derecho = n;
+        nuevoPadre.padre = n.padre;
+        n.padre = nuevoPadre;
 
         if(nuevoPadre.hayPadre()){
 
-            if(nuevoPadre.padre.hayIzquierdo() && nuevoPadre.padre.izquierdo == casteado)
+            if(nuevoPadre.padre.hayIzquierdo() && nuevoPadre.padre.izquierdo == n)
                 nuevoPadre.padre.izquierdo = nuevoPadre;
-            else if (nuevoPadre.padre.hayDerecho() && nuevoPadre.padre.derecho == casteado)
+            else if (nuevoPadre.padre.hayDerecho() && nuevoPadre.padre.derecho == n)
                 nuevoPadre.padre.derecho = nuevoPadre;
         }else
             this.raiz = nuevoPadre; 
