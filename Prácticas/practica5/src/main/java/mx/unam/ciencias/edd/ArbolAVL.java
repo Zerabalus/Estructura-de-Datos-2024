@@ -23,6 +23,7 @@ public class ArbolAVL<T extends Comparable<T>>
          */
         public VerticeAVL(T elemento) {
             // Aquí va su código.
+            super(elemento);
         }
 
         /**
@@ -31,6 +32,7 @@ public class ArbolAVL<T extends Comparable<T>>
          */
         @Override public int altura() {
             // Aquí va su código.
+            return altura;
         }
 
         /**
@@ -39,6 +41,11 @@ public class ArbolAVL<T extends Comparable<T>>
          */
         @Override public String toString() {
             // Aquí va su código.
+            /* 16.2 del libro: Además de la representación en cadena del elemento en el vértice,
+            también le concatenaremos la altura del vértice, una diagonal y el
+            balance de vértice, que será la diferencia de las alturas de sus hijos. */
+            return elemento.toString() + " "  + altura+"/"+getBalance(this);
+
         }
 
         /**
@@ -56,6 +63,7 @@ public class ArbolAVL<T extends Comparable<T>>
                 return false;
             @SuppressWarnings("unchecked") VerticeAVL vertice = (VerticeAVL)objeto;
             // Aquí va su código.
+            return (altura == vertice.altura && super.equals(objeto));
         }
     }
 
@@ -65,6 +73,7 @@ public class ArbolAVL<T extends Comparable<T>>
      */
     public ArbolAVL() {
         // Aquí va su código.
+        super();
     }
 
     /**
@@ -74,6 +83,7 @@ public class ArbolAVL<T extends Comparable<T>>
      */
     public ArbolAVL(Coleccion<T> coleccion) {
         // Aquí va su código.
+        super(coleccion);
     }
 
     /**
@@ -83,6 +93,7 @@ public class ArbolAVL<T extends Comparable<T>>
      */
     @Override protected Vertice nuevoVertice(T elemento) {
         // Aquí va su código.
+        return new VerticeAVL(elemento);
     }
 
     /**
@@ -93,6 +104,9 @@ public class ArbolAVL<T extends Comparable<T>>
      */
     @Override public void agrega(T elemento) {
         // Aquí va su código.
+        super.agrega(elemento);
+        VerticeAVL vertice = (VerticeAVL)ultimoAgregado.padre;
+        rebalanceo(vertice);
     }
 
     /**
@@ -102,6 +116,76 @@ public class ArbolAVL<T extends Comparable<T>>
      */
     @Override public void elimina(T elemento) {
         // Aquí va su código.
+        VerticeAVL elimina = (VerticeAVL)busca(elemento);
+        Vertice padre;
+        if(elimina == null)
+            return;
+        if(elimina.hayDerecho()&& elimina.hayIzquierdo()){
+            Vertice intercambiar = intercambiaEliminable(elimina);
+            padre = intercambiar.padre;
+            eliminaVertice(intercambiar);
+        }else{
+            padre = elimina.padre;
+            eliminaVertice(elimina);
+        }
+        elementos--;
+        rebalanceo((VerticeAVL)padre);
+    }
+
+    private int max(int i, int j){
+        if(i > j)
+            return i;
+        return j;
+    }
+
+    private void rebalanceo(VerticeAVL vertice){
+        if(vertice == null)
+            return;
+
+        actualizarAltura(vertice);
+
+        int balanceo = getBalance(vertice);
+
+        if(balanceo == 2){
+            VerticeAVL izquierdo = (VerticeAVL)vertice.izquierdo;
+            if(getBalance(izquierdo) == -1){ 
+                super.giraIzquierda(izquierdo);
+                actualizarAltura(izquierdo);
+            }
+            super.giraDerecha(vertice);
+            actualizarAltura(izquierdo);
+            actualizarAltura(vertice);
+        }
+
+        if(balanceo == -2){
+            VerticeAVL derecho = (VerticeAVL)vertice.derecho;
+            if(getBalance(derecho) == 1){ 
+                super.giraDerecha(derecho);
+                actualizarAltura(derecho);
+            }
+            super.giraIzquierda(vertice);
+            actualizarAltura(derecho);
+            actualizarAltura(vertice);
+        }
+
+        rebalanceo((VerticeAVL)vertice.padre);
+    }
+
+    private void actualizarAltura(Vertice vertice) {
+        if (vertice == null) {
+            return;
+        }
+
+        ((VerticeAVL) vertice).altura = 1 + max(vertice.hayIzquierdo() ? ((VerticeAVL) vertice.izquierdo).altura : -1,
+                vertice.hayDerecho() ? ((VerticeAVL) vertice.derecho).altura : -1);
+
+    }
+
+    private int getBalance(Vertice vertice) {
+        int ai = vertice.hayIzquierdo() ? ((VerticeAVL) vertice.izquierdo).altura : -1;
+        int ad = vertice.hayDerecho() ? ((VerticeAVL) vertice.derecho).altura : -1;
+
+        return ai - ad; //definicion de balanceo de vértices
     }
 
     /**
