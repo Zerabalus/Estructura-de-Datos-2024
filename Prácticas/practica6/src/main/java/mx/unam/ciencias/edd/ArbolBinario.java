@@ -60,7 +60,7 @@ public abstract class ArbolBinario<T> implements Coleccion<T> {
          */
         @Override public boolean hayDerecho() {
             // Aquí va su código.
-            return this.derecha != null;
+            return this.derecho != null;
         }
 
         /**
@@ -169,7 +169,7 @@ public abstract class ArbolBinario<T> implements Coleccion<T> {
          */
         @Override public String toString() {
             // Aquí va su código.
-            return elemento.toString
+            return elemento.toString();
         }
     }
 
@@ -191,6 +191,8 @@ public abstract class ArbolBinario<T> implements Coleccion<T> {
      */
     public ArbolBinario(Coleccion<T> coleccion) {
         // Aquí va su código.
+        for (T elemento : coleccion)
+            this.agrega(elemento);
     }
 
     /**
@@ -204,8 +206,7 @@ public abstract class ArbolBinario<T> implements Coleccion<T> {
      */
     protected Vertice nuevoVertice(T elemento) {
         // Aquí va su código.
-        for (T elemento : coleccion)
-            this.agrega(elemento);
+        return new Vertice(elemento);
     }
 
     /**
@@ -237,7 +238,7 @@ public abstract class ArbolBinario<T> implements Coleccion<T> {
      */
     @Override public boolean contiene(T elemento) {
         // Aquí va su código.
-        retun (busca(elemento) != null);
+        return (busca(elemento) != null);
     }
 
     /**
