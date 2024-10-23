@@ -38,6 +38,14 @@ public class MonticuloArreglo<T extends ComparableIndexable<T>>
      */
     public MonticuloArreglo(Iterable<T> iterable, int n) {
         // Aquí va su código.
+        arreglo = nuevoArreglo(n);
+        int i = 0;
+        for (T elemento : iterable) {
+            arreglo[i] = elemento;
+            arreglo[i].setIndice(i);
+            i++;
+        }
+        elementos = n;
     }
 
     /**
@@ -47,6 +55,23 @@ public class MonticuloArreglo<T extends ComparableIndexable<T>>
      */
     @Override public T elimina() {
         // Aquí va su código.
+        if (elementos == 0)
+            throw new IllegalStateException("El monticulo es vacio");
+
+        T minimo = arreglo[0];
+
+        for (T elemento : arreglo) // elemento puede ser null
+            if (minimo == null && elemento != null)
+                minimo = elemento;
+            else if (elemento != null && elemento.compareTo(minimo) <= 0)
+                minimo = elemento;
+
+        int indice = minimo.getIndice();
+        minimo.setIndice(-1);
+        arreglo[indice] = null;
+        elementos--;
+
+        return minimo;
     }
 
     /**
@@ -58,6 +83,12 @@ public class MonticuloArreglo<T extends ComparableIndexable<T>>
      */
     @Override public T get(int i) {
         // Aquí va su código.
+        if (i < 0)
+            throw new NoSuchElementException("No puedes ingresar indices menores a 0");
+        if (i >= elementos)
+            throw new NoSuchElementException("No puedes ingresar indices mayores a la longitud del arreglo");
+
+        return arreglo[i];
     }
 
     /**
@@ -75,5 +106,6 @@ public class MonticuloArreglo<T extends ComparableIndexable<T>>
      */
     @Override public int getElementos() {
         // Aquí va su código.
+        return elementos;
     }
 }
