@@ -3,7 +3,7 @@ package mx.unam.ciencias.edd.proyecto2.SVG;
 import mx.unam.ciencias.edd.*;
 
 /**
- * Clase para representar Árboles AVL.
+ * Clase de Árboles AVL en SVG.
  */
 public class ArbolAVLSVG extends ArbolBinarioSVG {
 
@@ -37,7 +37,7 @@ public class ArbolAVLSVG extends ArbolBinarioSVG {
             x -= 14;
         }
         String balanceVertice = String.format("<text x=\"%d\" y=\"%d\" font-family=\"Roboto-Regular\""
-        + " font-size=\"18\" fill=\"black\"" +
+        + " font-size=\"18\" fill=\"blue\"" +
         ">%s</text>\n", x, y + 12, vertice.get().toString());
         int indice = 0;
         if (vertice.get().toString().length() <= 2) {
