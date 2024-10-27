@@ -1,7 +1,7 @@
 package mx.unam.ciencias.edd.proyecto2;
 
 /**
- * Clase para representar las Estructuras De Datos mediante cadenas.
+ * Clase para representar las Estructuras De Datos.
  */
 public class Estructuras {
 
@@ -9,7 +9,7 @@ public class Estructuras {
   private String estructura;
 
   /**
-   * Estructuras. Construye la Estructura De Dato.
+   * Estructuras. Construye la edd.
    * @param estructura la estructura
    */
   public Estructuras(String estructura) {
@@ -26,8 +26,7 @@ public class Estructuras {
 
   /**
    * esLista. Determina si la Estructura de Datos es una Lista.
-   * @param estructura La Estructura da Datos.
-   * @return true sí es Lista, false en otro caso.
+   * @param estructura La Estructura de Datos.
    */
   public boolean esLista(String estructura) {
     return (estructura.equals("Lista"));
@@ -35,8 +34,7 @@ public class Estructuras {
 
   /**
    * esPila. Determina si la Estructura de Datos es una Pila.
-   * @param estructura La Estructura da Datos.
-   * @return true sí es Pila, false en otro caso.
+   * @param estructura La Estructura de Datos.
    */
   public boolean esPila(String estructura) {
     return estructura.equals("Pila");
@@ -44,8 +42,7 @@ public class Estructuras {
 
   /**
    * esCola. Determina si la Estructura de Datos es una Cola.
-   * @param estructura La Estructura da Datos.
-   * @return true sí es Cola, false en otro caso.
+   * @param estructura La Estructura de Datos.
    */
   public boolean esCola(String estructura) {
     return estructura.equals("Cola");
@@ -53,8 +50,7 @@ public class Estructuras {
 
   /**
    * esArbolBinarioCompleto. Determina si la Estructura de Datos es una Arbol Binario Completo.
-   * @param estructura La Estructura da Datos.
-   * @return true sí es Arbol Binario Completo, false en otro caso.
+   * @param estructura La Estructura de Datos.
    */
   public boolean esArbolBinarioCompleto(String estructura) {
     return estructura.equals("ArbolBinarioCompleto");
@@ -62,8 +58,7 @@ public class Estructuras {
 
   /**
    * esArbolBinarioOrdenado. Determina si la Estructura de Datos es una Arbol Binario Ordenado.
-   * @param estructura La Estructura da Datos.
-   * @return true sí es Arbol Binario Ordenado, false en otro caso.
+   * @param estructura La Estructura de Datos.
    */
   public boolean esArbolBinarioOrdenado(String estructura) {
     return estructura.equals("ArbolBinarioOrdenado");
@@ -71,8 +66,7 @@ public class Estructuras {
 
   /**
    * esArbolRojinegro. Determina si la Estructura de Datos es una Arbol Rojinegro.
-   * @param estructura La Estructura da Datos.
-   * @return true sí es Arbol Rojinegro, false en otro caso.
+   * @param estructura La Estructura de Datos.
    */
   public boolean esArbolRojinegro(String estructura) {
     return estructura.equals("ArbolRojinegro");
@@ -80,8 +74,7 @@ public class Estructuras {
 
   /**
    * esArbolAVL. Determina si la Estructura de Datos es una Arbol AVL.
-   * @param estructura La Estructura da Datos.
-   * @return true sí es Arbol AVL, false en otro caso.
+   * @param estructura La Estructura de Datos.
    */
   public boolean esArbolAVL(String estructura) {
     return estructura.equals("ArbolAVL");
@@ -89,8 +82,7 @@ public class Estructuras {
 
   /**
    * esGrafica. Determina si la Estructura de Datos es una Grafica.
-   * @param estructura La Estructura da Datos.
-   * @return true sí es Grafica, false en otro caso.
+   * @param estructura La Estructura de Datos.
    */
   public boolean esGrafica(String estructura) {
     return estructura.equals("Grafica");
@@ -98,8 +90,7 @@ public class Estructuras {
 
   /**
    * esMonticuloMinimo. Determina si la Estructura de Datos es una Monticulo Minimo.
-   * @param estructura La Estructura da Datos.
-   * @return true sí es Monticulo Minimo, false en otro caso.
+   * @param estructura La Estructura de Datos.
    */
   public boolean esMonticuloMinimo(String estructura) {
     return estructura.equals("MonticuloMinimo");
@@ -107,7 +98,6 @@ public class Estructuras {
 
   /**
    * estructuraValida. Determina sí la Estructura de Datos es válida.
-   * @return true sí la Estructura de Datos es válida false en otro caso.
    */
   public boolean estructuraValida() {
     return (

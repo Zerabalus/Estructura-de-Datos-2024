@@ -7,7 +7,6 @@ import mx.unam.ciencias.edd.*;
  */
 public class ArbolBinarioCompletoSVG extends ArbolBinarioSVG {
 
-    /** El árbol binario completo que representaremos */
     private ArbolBinarioCompleto<Integer> arbolBinarioCompleto;
     /** Vertice que nos servirá para recorrer el árbol binario completo. */
     private VerticeArbolBinario vertice;
@@ -21,8 +20,8 @@ public class ArbolBinarioCompletoSVG extends ArbolBinarioSVG {
     }
 
     /**
-     * arbolBinarioCompletoenSVG. Regresa una representación en SVG de Árbol Binario Completo.
-     * @return La representación en SVG de Árbol Binario Completo.
+     * arbolBinarioCompletoenSVG. Regresa una representación en SVG del ABO.
+     * @return La representación en SVG de ABO.
      */   
     public String arbolBinarioCompletoenSVG() {
         int ancho = arbolBinarioCompleto.getElementos() * 80;
@@ -30,9 +29,9 @@ public class ArbolBinarioCompletoSVG extends ArbolBinarioSVG {
         String arbolCompleto = "";
         arbolCompleto += setLongitudArbol(ancho + 10, altura);
         vertice = arbolBinarioCompleto.raiz();
-        dibujaArbolBinario(vertice, 0, 0, ancho / 2);
+        graficaArbolBinario(vertice, 0, 0, ancho / 2);
         arbolCompleto += arbolBinarioSVG();
-        arbolCompleto += cierre();
+        arbolCompleto += finaliza();
         return arbolCompleto;
     }
 

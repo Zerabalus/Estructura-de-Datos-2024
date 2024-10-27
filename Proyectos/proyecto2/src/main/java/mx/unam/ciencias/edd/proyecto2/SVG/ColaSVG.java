@@ -33,11 +33,11 @@ public class ColaSVG {
 
 
     /**
-    * dibujaRectangulo. Dibuja los rectángulos de la lista.
-    * @param x el entero desde donde vamos a empezar a dibujar el rectángulo.
+    * graficaRectangulo. Grafica los rectángulos de la lista.
+    * @param x el entero desde donde vamos a empezar a graficar el rectángulo.
     * @return el rectángulo en SVG.
     */
-    public String dibujaRectangulo(int x) {
+    public String graficaRectangulo(int x) {
         String rectangulo = String.format("\n<rect x=\'%s\' y=\'8\' rx=\'5\' ry =\'5\'" +
         " width=\'35\' height=\'25\'" +
         " style=\'fill:white;stroke:black;stroke-width:2;opacity:100\' />", x);
@@ -46,8 +46,8 @@ public class ColaSVG {
 
 
     /**
-    * elementoPilaSVG. Dibuja el elemento en la Cola.
-    * @param x el entero desde donde vamos a empezar a dibujar el elemento de la Cola.
+    * elementoPilaSVG. Grafica el elemento en la Cola.
+    * @param x el entero desde donde vamos a empezar a graficar el elemento de la Cola.
     * @param elemento el elemento de la Cola.
     * @return el elemento en SVG.
     */
@@ -59,19 +59,19 @@ public class ColaSVG {
     }
 
     /**
-    * cierre. Hace el cierre del archivo SVG.
-    * @return La cadena que cierra el archivo SVG.
+    * finaliza. Termina el archivo SVG.
+    * @return La cadena que termina el archivo SVG.
     */
     public String cierraSVG() {
         return "\n </g> \n</svg>";
     }
 
     /**
-    * dibujaFlechaDoblementeLigada. Dibuja las conexiones de la Cola.
-    * @param x el entero desde donde vamos a empezar a dibujar la flecha.
+    * graficaFlechaDoblementeLigada. Grafica las conexiones de la Cola.
+    * @param x el entero desde donde vamos a empezar a graficar la flecha.
     * @return La flecha.
     */
-    public String dibujaFlecha(int x) {
+    public String graficaFlecha(int x) {
         String flecha = String.format("\n<text x=\'%d\' y=\'20\' " +
         "font-family=\'Roboto-Regular\' font-size=\'10\' fill=\'black\'>←</text>", x);
         return flecha;
@@ -89,7 +89,7 @@ public class ColaSVG {
         int w;
       for (int i = 0; i < colaSVG.getLongitud(); i++) {
           int m = i;
-          cola += dibujaRectangulo(x);
+          cola += graficaRectangulo(x);
           if (colaSVG.get(i) < 10) {
               cola += elementoColaSVG(x + 14,colaSVG.get(i));
             } else if (colaSVG.get(i) >= 10 && colaSVG.get(i) < 100) {
@@ -100,7 +100,7 @@ public class ColaSVG {
             x += 35 + 8;
             w = x - 8;
             if (m < colaSVG.getLongitud() - 1) {
-                cola += dibujaFlecha(w);    
+                cola += graficaFlecha(w);    
             }
         }
         return cadena += cola + cierraSVG();

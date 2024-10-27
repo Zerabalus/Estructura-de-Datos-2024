@@ -30,19 +30,19 @@ public class PilaSVG {
   }
     
   /**
-    * cierre. Hace el cierre del archivo SVG.
-    * @return La cadena que cierra el archivo SVG.
+    * finaliza. Termina el archivo SVG.
+    * @return La cadena que termina el archivo SVG.
     */
   public String cierraSVG(){
     return "\n </g> \n</svg>";
   }
   
   /**
-   * dibujaRectangulo. Dibuja los rectángulos de la lista.
-   * @param y el entero desde donde vamos a empezar a dibujar el rectángulo.
+   * graficaRectangulo. Grafica los rectángulos de la lista.
+   * @param y el entero desde donde vamos a empezar a graficar el rectángulo.
    * @return el rectángulo en SVG.
    */
-  public String dibujaRectangulo(int y){
+  public String graficaRectangulo(int y){
     String rectangulo = String.format("\n<rect x=\'3\' y=\'%d\' rx=\'2\' ry =\'2\'" +
     " width=\'95\' height=\'25\' style=\'fill:white;" +
     "stroke:black;stroke-width:1;opacity:100\' />",y);
@@ -50,8 +50,8 @@ public class PilaSVG {
   }
 
   /**
-   * elementoPilaSVG. Dibuja el elemento en la Pila.
-   * @param x el entero desde donde vamos a empezar a dibujar el elemento de la Pila.
+   * elementoPilaSVG. Grafica el elemento en la Pila.
+   * @param x el entero desde donde vamos a empezar a graficar el elemento de la Pila.
    * @param elemento el elemento de la Pila.
    * @return el elemento en SVG.
    */
@@ -80,7 +80,7 @@ public class PilaSVG {
     String pila = "";
     int y = 5;
     for(int entero : pilaSVG) {
-      pila += dibujaRectangulo(y);
+      pila += graficaRectangulo(y);
       pila += elementoPilaSVG(y + 16, entero);
       y += 25;
     }

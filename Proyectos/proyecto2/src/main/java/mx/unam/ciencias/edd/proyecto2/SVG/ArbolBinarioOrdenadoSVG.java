@@ -30,9 +30,9 @@ public class ArbolBinarioOrdenadoSVG extends ArbolBinarioSVG {
         String arbol = "";
         arbol += setLongitudArbol(ancho + 10, altura);
         vertice = arbolOrdenado.raiz();
-        dibujaArbolBinario(vertice, 0 , 0 , ancho / 2 );
+        graficaArbolBinario(vertice, 0 , 0 , ancho / 2 );
         arbol += arbolBinarioSVG();
-        arbol += cierre();
+        arbol += finaliza();
         return arbol;
     }
 

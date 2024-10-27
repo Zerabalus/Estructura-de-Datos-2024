@@ -8,7 +8,6 @@ mx/unam/ciencias/edd/ArbolBinario.class
 mx/unam/ciencias/edd/ExcepcionIndiceInvalido.class
 mx/unam/ciencias/edd/MonticuloDijkstra.class
 mx/unam/ciencias/edd/Arreglos.class
-mx/unam/ciencias/edd/proyecto2/PilaSVG.class
 mx/unam/ciencias/edd/VerticeGrafica.class
 mx/unam/ciencias/edd/Grafica$Iterador.class
 mx/unam/ciencias/edd/ArbolBinario$Vertice.class

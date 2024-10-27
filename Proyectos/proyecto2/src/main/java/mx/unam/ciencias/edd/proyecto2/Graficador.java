@@ -20,30 +20,26 @@ import mx.unam.ciencias.edd.proyecto2.SVG.PilaSVG;
 import mx.unam.ciencias.edd.Grafica;
 
 /**
- * Clase para representar lo que se debe dibujar
+ * Clase para representar lo que se debe graficar
  */
-public class Argumentos {
+public class Graficador {
     
-     /*La estructura de datos */
+    /*La estructura de datos */
     private static String edd;
-    /** El contenido de la Estructura de Datos */
-    private Lista<String> contenido = new Lista<String>();
-    /** Los números de la Estructura de Datos obtenida desde un archivo o de la entrada estándar */
+    private Lista<String> listaCadena = new Lista<String>();
+    /** Los números de la Estructura de Datos obtenida */
     private Lista<Integer> elementos = new Lista<Integer>();
-    /** El nombre del archivo recibido de la terminal */
+    /** El nombre del archivo recibido */
     private String nombreDeArchivo = null;
-    /** Estructura de Datos */
     private Estructuras estructura;
-    /** Las aristas de la Gráfica (Sí es que nos pasan una gráfica) */
     private Lista<String> aristasGrafica  = new Lista<String>();
-    /** Los elementos de la Gráfica (Sí es que nos pasan una gráfica) */
     private Lista<Integer> elementosGrafica = new Lista<Integer>();
 
     /**
-     * leeArgumentos. Lee los argumentos recibidos de la terminal
+     * leeInput. Lee los argumentos recibidos de la terminal
      * @param args El arreglo recibido de la terminal.
      */
-    public void leeArgumentos(String[] args) {
+    public void leeInput(String[] args) {
         if (args.length == 1) {
             nombreDeArchivo = args[0];
             leerArchivo(nombreDeArchivo);
@@ -65,11 +61,11 @@ public class Argumentos {
             InputStreamReader entrada = new InputStreamReader(System.in);
             BufferedReader leer = new BufferedReader(entrada);
             while ((cadena = leer.readLine()) != null) {
-                cadena = elementoArchivo(cadena);
+                cadena = Almohadilla(cadena);
                 cadenas = cadena.split(",");
                 for (String s : cadenas) {
                     if (s.length() > 0) {
-                        contenido.agregaFinal(s);
+                        listaCadena.agregaFinal(s);
                     }
                 }
             }
@@ -78,10 +74,10 @@ public class Argumentos {
             System.err.println("Ha ocurrido un error");
             System.exit(1);
         }
-        edd = contenido.eliminaPrimero().trim();
+        edd = listaCadena.eliminaPrimero().trim();
         estructura = new Estructuras(edd);
         if (estructura.estructuraValida()) {
-            getElementos(contenido);
+            getElementos(listaCadena);
         } else {
             System.err.println("La estructura de datos es inválida");
             System.exit(1);
@@ -110,23 +106,23 @@ public class Argumentos {
             FileReader archivo = new FileReader(nombreDeArchivo);
             BufferedReader leer = new BufferedReader(archivo);
             while ((cadena = leer.readLine()) != null) {
-                cadena = elementoArchivo(cadena);
+                cadena = Almohadilla(cadena);
                 cadenas = cadena.split(",");
                 for (String s : cadenas) {
                     if (s.length() > 0) {
-                        contenido.agregaFinal(s);
+                        listaCadena.agregaFinal(s);
                     }
                 }
             }
             leer.close();
         } catch (IOException ioe) {
-            System.err.println("Ha ocurrido un error al leer el archivo");
+            System.err.println("Hubo un error al leer el archivo");
             System.exit(1);
         }
-        edd = contenido.eliminaPrimero().trim();
+        edd = listaCadena.eliminaPrimero().trim();
         estructura = new Estructuras(edd);
         if (estructura.estructuraValida()) {
-            getElementos(contenido);
+            getElementos(listaCadena);
         } else {
             System.err.println("La estructura de datos es inválida");
             System.exit(1);
@@ -145,11 +141,11 @@ public class Argumentos {
     } 
 
     /**
-     * elementoArchivo. Detecta si hay la almohadilla "#" en el archivo o la entrada estándar y normaliza la cadena.
+     * Almohadilla. Detecta si hay la almohadilla "#" en el archivo o la entrada.
      * @param cadena la cadena a normalizar.
-     * @return cadena normaliza.
+     * @return cadena normalizada.
      */
-    private String elementoArchivo(String cadena) {
+    private String Almohadilla(String cadena) {
         if (cadena.contains("#")) {
             cadena = cadena.substring(0, cadena.indexOf("#"));
             cadena = cadena.trim().replace(" ", ",");
@@ -161,18 +157,18 @@ public class Argumentos {
     }
     
     /**
-     * getElementos. Convierte todas las cadenas de la Estructura De Datos.
-     * @param contenido La lista de cadenas de la Estructura De Datos que se va convertir a enteros.
+     * getElementos. Convierte las cadenas de la Estructura De Datos.
+     * @param listaCadena La lista a convertir.
      */
-    private void getElementos(Lista<String> contenido) {
-        for (String s : contenido) {
+    private void getElementos(Lista<String> listaCadena) {
+        for (String s : listaCadena) {
             s = s.trim();
             String[] arreglo = s.split(" ");
             for (int i = 0; i < arreglo.length; i++) {
                 try {
                     elementos.agregaFinal(Integer.parseInt(arreglo[i]));
                 } catch (NumberFormatException nfe) {
-                    System.err.println("Sólo debe introducir números a la estructura de datos");
+                    System.err.println("Sólo deben de haber números en la estructura");
                     System.exit(1);
                 }
             }
@@ -181,9 +177,9 @@ public class Argumentos {
 
 
     /**
-     * svgEDD. Dibuja la Estructura De Datos.
-     * @param cadena La Estructura de Datos a dibujar.
-     * @return  La Estructura de Datos dibujada.
+     * svgEDD. Grafica la Estructura De Datos.
+     * @param cadena La Estructura de Datos a graficar.
+     * @return  La Estructura de Datos graficada.
      */
     public String svgEDD(String cadena) {
         String edd = "";

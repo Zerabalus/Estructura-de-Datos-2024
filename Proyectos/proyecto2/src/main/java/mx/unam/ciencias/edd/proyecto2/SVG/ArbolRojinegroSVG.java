@@ -23,71 +23,71 @@ public class ArbolRojinegroSVG extends ArbolBinarioSVG {
     }
 
     /**
-     * dibujaverticeRojo. El vértice rojo del árbol Rojinegro.
-     * @param cx La coordena del centro del vértice.
-     * @param cy La coordena del centro del vértice
+     * graficaverticeRojo. El vértice rojo del árbol Rojinegro.
+     * @param cx La coordenada del centro del vértice.
+     * @param cy La coordenada del centro del vértice
      * @return El vertice del árbol Rojinegro.
      */
-    public String dibujaVerticeRojo(int cx, int cy) {
+    public String graficaVerticeRojo(int cx, int cy) {
         String cadena = String.format("\n<circle cx=\'%s\' cy=\'%d\' r=\'25\' " +
         "stroke=\'firebrick\' stroke-width=\'2\' fill=\'firebrick\' />", cx, cy);
         return cadena;
     }
 
     /**
-     * dibujaAristaRojinegro. Dibuja las aristas del árbol Rojinegro.
+     * graficaAristaRojinegro. Grafica las aristas del árbol Rojinegro.
      * @param x1 Coordenada en x donde va a iniciar la línea.
      * @param y1 Coordenada en y donde va a iniciar la línea.
      * @param x2 Coordenada en x donde va a terminar la línea.
      * @param y2 Coordenada en y donde va a terminar la línea.
      * @return La arista del árbol Rojinegro en SVG.
      */
-    public String dibujaAristaRojinegro(int x1, int y1, int x2, int y2) {
+    public String graficaAristaRojinegro(int x1, int y1, int x2, int y2) {
         String aristaRojinegro = String.format("\n<line x1=\'%d\' y1=\'%d\' x2=\'%d\' " +
         "y2=\'%d\' stroke=\'black\' stroke-width=\'2\' />", x1, y1, x2, y2);
         return aristaRojinegro;
     }
 
     /**
-     * dibujaverticeNegro. El vértice negro del árbol Rojinegro.
-     * @param cx La coordena del centro del vértice.
-     * @param cy La coordena del centro del vértice
+     * graficaverticeNegro. El vértice negro del árbol Rojinegro.
+     * @param cx La coordenada del centro del vértice.
+     * @param cy La coordenada del centro del vértice
      * @return El vertice del árbol Rojinegro.
      */
-    public String dibujaVerticeNegro(int cx, int cy) {
+    public String graficaVerticeNegro(int cx, int cy) {
         String cadena = String.format("\n<circle cx=\'%s\' cy=\'%d\' r=\'25\' " +
         "stroke=\'black\' stroke-width=\'2\' fill=\'black\' />", cx, cy);
         return cadena;
     }
 
     /**
-     * dibujaArbolRojinegro. Dibuja el Árbol Rojinegro.
+     * graficaArbolRojinegro. Grafica el Árbol Rojinegro.
      */
-    public void dibujaArbolRojinegro(VerticeArbolBinario vertice, int x, int y, int z) {
+    public void graficaArbolRojinegro(VerticeArbolBinario vertice, int x, int y, int z) {
         if (vertice.toString().substring(0,1).equals("R")) {
-            arbolRN += dibujaVerticeRojo(z, y + 20);
+            arbolRN += graficaVerticeRojo(z, y + 20);
         }
         if (vertice.toString().substring(0,1).equals("N")) {
-            arbolRN += dibujaVerticeNegro(z, y + 20);
+            arbolRN += graficaVerticeNegro(z, y + 20);
         }
         arbolRN += elementoArbolRojinegro(vertice, z, y + 30);
         if (vertice.hayIzquierdo()) {
             int izquierda = (z - x) / 2;
-            arbolRN += dibujaAristaRojinegro(z - 25, y + 25, z - izquierda, y + 60);
-            dibujaArbolRojinegro(vertice.izquierdo(), x, y + 45, z - izquierda);
+            arbolRN += graficaAristaRojinegro(z - 25, y + 25, z - izquierda, y + 60);
+            graficaArbolRojinegro(vertice.izquierdo(), x, y + 45, z - izquierda);
         }
         if (vertice.hayDerecho()) {
             int derecha = (z - x) / 2;
-            arbolRN += dibujaAristaRojinegro(z + 25, y + 25, z + derecha , y + 55);
-            dibujaArbolRojinegro(vertice.derecho(), z, y + 45, z + derecha);
+            arbolRN += graficaAristaRojinegro(z + 25, y + 25, z + derecha , y + 55);
+            graficaArbolRojinegro(vertice.derecho(), z, y + 45, z + derecha);
         }
     }
 
     /**
      * elementoArbolRojinegro. El elemento del árbol Rojinegro.
      * @param vertice El vértice donde está el elemento del árbol binario.
-     * @param x el entero desde donde vamos a empezar a dibujar el elemento.
-     * @param y el entero desde donde vamos a empezar a dibujar el elemento.
+     * @param x el entero desde donde vamos a empezar a graficar el elemento.
+     * @param y el entero desde donde vamos a empezar a graficar el elemento.
      * @return Representación del elemento del vértice en SVG.
      */
     public String elementoArbolRojinegro(VerticeArbolBinario vertice,
@@ -116,9 +116,9 @@ public class ArbolRojinegroSVG extends ArbolBinarioSVG {
         String arbol = "";
         arbol += setLongitudArbol(ancho + 15, altura);
         vertice = arbolRojinegro.raiz();
-        dibujaArbolRojinegro(vertice, 0, 0, ancho / 2);
+        graficaArbolRojinegro(vertice, 0, 0, ancho / 2);
         arbol += arbolRN;
-        arbol += cierre();
+        arbol += finaliza();
         return arbol;
     }
 
