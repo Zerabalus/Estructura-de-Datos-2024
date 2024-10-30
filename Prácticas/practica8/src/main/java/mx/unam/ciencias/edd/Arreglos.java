@@ -19,6 +19,33 @@ public class Arreglos {
     public static <T> void
     quickSort(T[] arreglo, Comparator<T> comparador) {
         // Aquí va su código.
+        quickSort(arreglo, 0, arreglo.length-1, comparador);
+    }
+
+    public static <T> void quickSort(T[] arreglo, int ini, int fin, Comparator<T> comparador) {
+        if (fin <= ini) {
+            return;
+        }
+        int i = ini + 1;
+        int j = fin;
+        while (i < j) {
+            if ((comparador.compare(arreglo[i], arreglo[ini]) > 0)
+                    && comparador.compare(arreglo[j], arreglo[ini]) <= 0) {
+                intercambia(arreglo, i, j);
+                i++;
+                j--;
+            } else if (comparador.compare(arreglo[i], arreglo[ini]) <= 0) {
+                i++;
+            } else {
+                j--;
+            }
+        }
+        if (comparador.compare(arreglo[i], arreglo[ini]) > 0) {
+            i--;
+        }
+        intercambia(arreglo, ini, i);
+        quickSort(arreglo, ini, i - 1, comparador);
+        quickSort(arreglo, i + 1, fin, comparador);
     }
 
     /**
@@ -28,7 +55,7 @@ public class Arreglos {
      */
     public static <T extends Comparable<T>> void
     quickSort(T[] arreglo) {
-        quickSort(arreglo, (a, b) -> a.compareTo(b)) {
+        quickSort(arreglo, (a, b) -> a.compareTo(b));
     }
 
     /**
@@ -40,6 +67,23 @@ public class Arreglos {
     public static <T> void
     selectionSort(T[] arreglo, Comparator<T> comparador) {
         // Aquí va su código.
+        int m;
+        for (int i = 0; i < arreglo.length; i++) {
+            m = i;
+            for (int j = i + 1; j < arreglo.length; j++) {
+                if (comparador.compare(arreglo[j], arreglo[m]) < 0) {
+                    m = j;
+                }
+            }
+            intercambia(arreglo, i, m);
+        }
+    }
+
+    private static <T> void intercambia(T[] arreglo, int a, int b) {
+        T elemento1 = arreglo[a];
+        T elemento2 = arreglo[b];
+        arreglo[a] = elemento2;
+        arreglo[b] = elemento1;
     }
 
     /**
@@ -64,6 +108,22 @@ public class Arreglos {
     public static <T> int
     busquedaBinaria(T[] arreglo, T elemento, Comparator<T> comparador) {
         // Aquí va su código.
+        int a = 0;
+        int b = arreglo.length - 1;
+        return e(arreglo, elemento, comparador, a, b);
+    }
+
+    private static <T> int e(T[] arreglo, T elemento, Comparator<T> comparador, int a, int b) {
+        if (b < a)
+            return -1;
+        int m = a + ((b - a) / 2);
+        int compara = comparador.compare(elemento, arreglo[m]);
+        if (compara == 0)
+            return m;
+        else if (compara < 0)
+            return e(arreglo, elemento, comparador, a, m - 1);
+        else
+            return e(arreglo, elemento, comparador, m + 1, b);
     }
 
     /**
