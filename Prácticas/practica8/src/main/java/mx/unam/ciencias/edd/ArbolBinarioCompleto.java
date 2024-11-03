@@ -41,6 +41,7 @@ public class ArbolBinarioCompleto<T> extends ArbolBinario<T> {
             if (v.hayDerecho())
                 cola.mete(v.derecho);
             return v.elemento;
+            
         }
     }
 

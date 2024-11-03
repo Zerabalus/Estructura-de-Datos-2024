@@ -38,7 +38,6 @@ public class MonticuloArreglo<T extends ComparableIndexable<T>>
      */
     public MonticuloArreglo(Iterable<T> iterable, int n) {
         // Aquí va su código.
-
         /* Creamos un nuevo arreglo usando nuevoArreglo() con la n recibida y
         agregamos los elementos del iterable en el arreglo, definiendo los índices
         de los mismos. La variable elementos se inicializa con el tamaño del

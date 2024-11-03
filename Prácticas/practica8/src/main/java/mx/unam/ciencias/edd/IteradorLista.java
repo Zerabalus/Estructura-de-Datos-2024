@@ -34,7 +34,7 @@ public interface IteradorLista<T> extends Iterator<T> {
     public void start();
 
     /**
-     * Mueve el iterador a la derecha del último elemento. Después de llamar
+     *000000000000000000000000 Mueve el iterador a la derecha del último elemento. Después de llamar
      * este método, el método {@link IteradorLista#hasPrevious} siempre regresa
      * <code>true</code> si la lista no es vacía.
      */

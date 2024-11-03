@@ -44,12 +44,13 @@ public class Lista<T> implements Coleccion<T> {
         private Iterador() {
             // Aquí va su código.
             start();
+
         }
 
         /* Nos dice si hay un elemento siguiente. */
         @Override public boolean hasNext() {
             // Aquí va su código.
-            return (siguiente != null);
+            return siguiente != null;
         }
 
         /* Nos da el elemento siguiente. */
@@ -66,7 +67,7 @@ public class Lista<T> implements Coleccion<T> {
         /* Nos dice si hay un elemento anterior. */
         @Override public boolean hasPrevious() {
             // Aquí va su código.
-            return (anterior != null);
+            return anterior != null;
         }
 
         /* Nos da el elemento anterior. */
@@ -82,7 +83,7 @@ public class Lista<T> implements Coleccion<T> {
             return elemento;
             }
         }
-        
+
         /* Mueve el iterador al inicio de la lista. */
         @Override public void start() {
             // Aquí va su código.
@@ -454,6 +455,23 @@ public class Lista<T> implements Coleccion<T> {
             return false;
         @SuppressWarnings("unchecked") Lista<T> lista = (Lista<T>)objeto;
         // Aquí va su código.
+        if (lista == null)
+            return false;
+        else if (lista.getLongitud() != longitud)
+            return false;
+        else if (lista.getLongitud() == 0 && longitud == 0)
+            return true;
+
+        Nodo nodo1 = cabeza;
+        Nodo nodo2 = lista.cabeza;
+
+        for (int i = 0; i < longitud && nodo1 != null; i++) {
+            if (!nodo1.elemento.equals(nodo2.elemento))
+                return false;
+            nodo1 = nodo1.siguiente;
+            nodo2 = nodo2.siguiente;
+        }
+        return true;
     }
 
     /**
@@ -482,6 +500,56 @@ public class Lista<T> implements Coleccion<T> {
      */
     public Lista<T> mergeSort(Comparator<T> comparador) {
         // Aquí va su código.
+        return mergeSort(copia(), comparador);
+    }
+
+    //método que divide la lista
+    private Lista<T> mergeSort(Lista<T> l, Comparator<T> comparador) {
+        if (l.esVacia() || l.getLongitud() <= 1) {
+            return l; 
+            // revisa si no es nulo o su longitud es menor a cero, 
+            // tambien pudo haber sido ==0
+        }
+        int mitad = l.getLongitud() / 2; //divide la lista
+        Lista<T> l1 = new Lista<T>(); //crea una nueva lista
+        Lista<T> l2;                  //lista para guardar las mitades
+        while (l.getLongitud() != mitad) {
+            l1.agregaFinal(l.getPrimero());
+            if (l.getLongitud() != 0) //longitud distinta de 0 (null no porque es elemento)
+                l.eliminaPrimero(); //elimina el primero para no dejar la lista y desperdiciar memoria
+        }
+        l2 = l.copia(); 
+        return mezcla(mergeSort(l1, comparador), mergeSort(l2, comparador), comparador);
+    }
+
+    //método que hace la mezcla de las listas a y b en una lista ordenada
+    private Lista<T> mezcla(Lista<T> a, Lista<T> b, Comparator<T> comparador) {
+        Lista<T> listaOrdenada = new Lista<T>();
+        //crea una nueva lista y la asigna a la lista ordenada
+        while (a.cabeza != null && b.cabeza != null) {
+            int i = comparador.compare(a.cabeza.elemento, b.cabeza.elemento);
+            //comparamos los elementos de a y b y los agregamos a la variable i
+            if (i <= 0) { //i es menor o igual a 0
+                listaOrdenada.agregaFinal(a.getPrimero()); 
+                a.eliminaPrimero();
+                //agregamos el primero de a al final de la lista ordenada y la borra
+            } else {
+                listaOrdenada.agregaFinal(b.getPrimero());
+                b.eliminaPrimero(); 
+                //igual que anterior pero con b
+            }
+        }
+
+        //agregamos los elementos restantes de la lista
+        while (a.cabeza != null) {
+            listaOrdenada.agregaFinal(a.getPrimero());
+            a.eliminaPrimero();
+        }
+        while (b.cabeza != null) {
+            listaOrdenada.agregaFinal(b.getPrimero());
+            b.eliminaPrimero();
+        }
+        return listaOrdenada;
     }
 
     /**
@@ -507,6 +575,12 @@ public class Lista<T> implements Coleccion<T> {
      */
     public boolean busquedaLineal(T elemento, Comparator<T> comparador) {
         // Aquí va su código.
+        Nodo n = cabeza;
+        while(n != null){
+            if(comparador.compare(elemento, n.elemento) == 0) return true;
+            n = n.siguiente;
+        }
+        return false;
     }
 
     /**

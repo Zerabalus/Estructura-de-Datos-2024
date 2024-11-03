@@ -39,7 +39,7 @@ public class ArbolBinarioOrdenado<T extends Comparable<T>>
         /* Nos dice si hay un elemento siguiente. */
         @Override public boolean hasNext() {
             // Aquí va su código.
-            return (!pila.esVacia());
+            return !pila.esVacia();
         }
 
         /* Regresa el siguiente elemento en orden DFS in-order. */
@@ -90,10 +90,10 @@ public class ArbolBinarioOrdenado<T extends Comparable<T>>
      */
     @Override public void agrega(T elemento) {
         // Aquí va su código.
-        if (elemento == null)
+        if(elemento == null)
             throw new IllegalArgumentException();
         Vertice nuevo = nuevoVertice(elemento);
-        if (esVacia())
+        if(esVacia())
             raiz = nuevo;
         else
             compara(this.raiz, nuevo);
@@ -102,16 +102,16 @@ public class ArbolBinarioOrdenado<T extends Comparable<T>>
         ultimoAgregado = nuevo;
     }
 
-    private void compara(Vertice actual, Vertice insertable) {
-        if (insertable.elemento.compareTo(actual.elemento) <= 0) {
-            if (!actual.hayIzquierdo()) {
+    private void compara(Vertice actual, Vertice insertable){
+        if(insertable.elemento.compareTo(actual.elemento) <=0){
+            if(!actual.hayIzquierdo()){
                 actual.izquierdo = insertable;
                 insertable.padre = actual;
             } else
                 compara(actual.izquierdo, insertable);
 
-        } else {
-            if (!actual.hayDerecho()) {
+        }else{
+            if(!actual.hayDerecho()){
                 actual.derecho = insertable;
                 insertable.padre = actual;
             } else
@@ -209,6 +209,7 @@ public class ArbolBinarioOrdenado<T extends Comparable<T>>
             return busca(v.izquierdo, elemento);
         else
             return busca(v.derecho, elemento);
+
     }
 
     /**

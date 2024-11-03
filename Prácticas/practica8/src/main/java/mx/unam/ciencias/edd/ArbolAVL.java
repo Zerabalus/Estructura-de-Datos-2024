@@ -39,21 +39,17 @@ public class ArbolAVL<T extends Comparable<T>>
          * Regresa una representación en cadena del vértice AVL.
          * @return una representación en cadena del vértice AVL.
          */
-        @Override
-        public String toString() {
+        @Override public String toString() {
             // Aquí va su código.
-            /*
-             * 16.2 del libro: Además de la representación en cadena del elemento en el
-             * vértice,
-             * también le concatenaremos la altura del vértice, una diagonal y el
-             * balance de vértice, que será la diferencia de las alturas de sus hijos.
-             */
+            /* 16.2 del libro: Además de la representación en cadena del elemento en el vértice,
+            también le concatenaremos la altura del vértice, una diagonal y el
+            balance de vértice, que será la diferencia de las alturas de sus hijos. */
             return toStringAux(this);
         }
-
-        private String toStringAux(VerticeAVL vertice) {
-            return vertice.elemento.toString() + " " + vertice.altura() + "/" + balance(vertice);
+        private String toStringAux(VerticeAVL vertice){
+            return vertice.elemento.toString()+" "+vertice.altura()+"/"+balance(vertice);
         }
+    
 
         /**
          * Compara el vértice con otro objeto. La comparación es
@@ -100,7 +96,8 @@ public class ArbolAVL<T extends Comparable<T>>
      */
     @Override protected Vertice nuevoVertice(T elemento) {
         // Aquí va su código.
-        return new VerticeAVL(elemento);        
+        return new VerticeAVL(elemento);
+
     }
 
     /**

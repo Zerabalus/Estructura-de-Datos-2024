@@ -98,6 +98,7 @@ public abstract class ArbolBinario<T> implements Coleccion<T> {
                 throw new NoSuchElementException();
             return derecho;
         }
+
         private int max(int i, int j){
             if(i > j)
                 return i;
@@ -335,7 +336,7 @@ public abstract class ArbolBinario<T> implements Coleccion<T> {
      * @return una representación en cadena del árbol.
      */
     @Override public String toString() {
-        // Aquí va su código.
+        // Aquí va su código.}
         if(esVacia())
             return "";
         int[]array = new int[altura()+1];
