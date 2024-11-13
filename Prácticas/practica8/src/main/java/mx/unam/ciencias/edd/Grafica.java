@@ -68,19 +68,19 @@ public class Grafica<T> implements Coleccion<T> {
         /* Regresa el grado del vértice. */
         @Override public int getGrado() {
             // Aquí va su código.
-            return vecinos.getLongitud();
+            return vecinos.getLongitud();//longitud de la lista de vértices vecinos.
         }
 
         /* Regresa el color del vértice. */
         @Override public Color getColor() {
             // Aquí va su código.
-            return color;
+            return color;//regresa el color el vértice
         }
 
         /* Regresa un iterable para los vecinos. */
         @Override public Iterable<? extends VerticeGrafica<T>> vecinos() {
             // Aquí va su código.
-            return vecinos;
+            return vecinos;//regresa vertices vecinos
         }
 
         /* Define el índice del vértice. */
@@ -192,10 +192,10 @@ public class Grafica<T> implements Coleccion<T> {
     @Override public void agrega(T elemento) {
         // Aquí va su código.
         if(elemento==null)
-            throw new IllegalArgumentException("Elemento no valido");
+            throw new IllegalArgumentException("No se permiten elementos nulos");
 
         if(contiene(elemento))
-            throw new IllegalArgumentException("El elemento ya está en la grafica");
+            throw new IllegalArgumentException("El elemento ya había sido agregado a la gráfica");
 
         Vertice vertice=new Vertice(elemento);
         vertices.agrega(vertice);
@@ -227,17 +227,20 @@ public class Grafica<T> implements Coleccion<T> {
      */
     public void conecta(T a, T b, double peso) {
         // Aquí va su código.
-        if(a==b)
-            throw new IllegalArgumentException("No puedes conectar un vertice a si mismo");
+        if(!contiene(a) || !contiene(b))
+            throw new NoSuchElementException("Faltan elementos en la gráfica");
 
-        if(peso <=0)
-            throw new IllegalArgumentException("EL peso es negativo");
+        if (a == b)
+            throw new IllegalArgumentException("Un vertice no puede conectarse a si mismo");
 
-        if(sonVecinos(a, b))
+        if (peso <= 0)
+            throw new IllegalArgumentException("El peso no puede ser negativo");
+
+        if (sonVecinos(a, b))
             throw new IllegalArgumentException("Los vertices ya están conectados");
 
-        Vertice uno=busca(a);
-        Vertice dos=busca(b);
+        Vertice uno = busca(a);
+        Vertice dos = busca(b);
 
         dos.vecinos.agrega(new Vecino(uno, peso));
         uno.vecinos.agrega(new Vecino(dos, peso));
@@ -255,17 +258,20 @@ public class Grafica<T> implements Coleccion<T> {
      */
     public void desconecta(T a, T b) {
         // Aquí va su código.
-        if(a==b)
-            throw new IllegalArgumentException("No puedes conectar un vertice a sí mismo");
+        if(!contiene(a) || !contiene(b))
+            throw new NoSuchElementException("Faltan elementos en la gráfica");
 
-        if(!sonVecinos(a,b))
+        if (a == b)
+            throw new IllegalArgumentException("No puedes conectar un vertice a si mismo");
+
+        if (!sonVecinos(a, b))
             throw new IllegalArgumentException("Los vertices no están conectados");
 
-        Vertice verticeA=busca(a);
-        Vertice verticeB=busca(b);
+        Vertice verticeA = busca(a);
+        Vertice verticeB = busca(b);
 
-        Vecino bb=obtenerVecino(verticeA, verticeB);
-        Vecino aa=obtenerVecino(verticeB, verticeA);
+        Vecino bb = obtenerVecino(verticeA, verticeB);
+        Vecino aa = obtenerVecino(verticeB, verticeA);
 
         verticeA.vecinos.elimina(bb);
         verticeB.vecinos.elimina(aa);
@@ -300,7 +306,7 @@ public class Grafica<T> implements Coleccion<T> {
     @Override public void elimina(T elemento) {
         // Aquí va su código.
         if(elemento==null)
-            throw new IllegalArgumentException("Elemento no valido");
+            throw new NoSuchElementException("El elemento no esta contenido en la gráfica");
 
         Vertice vertice=busca(elemento);
 
@@ -320,6 +326,9 @@ public class Grafica<T> implements Coleccion<T> {
      */
     public boolean sonVecinos(T a, T b) {
         // Aquí va su código.
+        if(!contiene(a) || !contiene(b))
+            throw new NoSuchElementException("Faltan elementos en la gráfica");
+
         Vertice uno=busca(a);
         Vertice dos=busca(b);
 
@@ -339,7 +348,7 @@ public class Grafica<T> implements Coleccion<T> {
     public double getPeso(T a, T b) {
         // Aquí va su código.
         if(!contiene(a) || !contiene(b))
-            throw new NoSuchElementException("No está algun elemento en la grafica");
+            throw new NoSuchElementException("Faltan elementos en la gráfica");
 
         if(!sonVecinos(a,b))
             throw new IllegalArgumentException("Los elementos no son vecinos");
@@ -621,7 +630,7 @@ public class Grafica<T> implements Coleccion<T> {
                           trayectoria.agrega(vecino.vecino);
                           fin = vecino.vecino;
                           fin.vecinos=vecino.vecino.vecinos;
-                          break;//una vez encontrado no hace falta verificar el resto(en esta iteracion)
+                          break;
                         }
 
         return trayectoria.reversa();
