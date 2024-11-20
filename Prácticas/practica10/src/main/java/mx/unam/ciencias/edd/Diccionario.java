@@ -39,6 +39,7 @@ public class Diccionario<K, V> implements Iterable<V> {
          * diccionario. */
         private Iterador() {
             // Aquí va su código.
+            //busca la primera lista distinta de nulo
             boolean hayLista = false;
             for (int i = 0; i < entradas.length; i++) {
                 if (entradas[i] != null && entradas[i].getLongitud() > 0) {
@@ -48,6 +49,7 @@ public class Diccionario<K, V> implements Iterable<V> {
                     break;
                 }
             }
+            //si ninguna lista es distinta de nulo el iterador es nulo
             if (!(hayLista)) {
                 this.iterador = null;
             }
@@ -56,15 +58,26 @@ public class Diccionario<K, V> implements Iterable<V> {
         /* Nos dice si hay una siguiente entrada. */
         public boolean hasNext() {
             // Aquí va su código.
+            //el iterador verifica que el iterador no sea nulo
             return iterador != null;
         }
 
         /* Regresa la siguiente entrada. */
         protected Entrada siguiente() {
             // Aquí va su código.
+            //21.3 algoritmo para diccionarios
+            //Si el iterador es ⌀ ocurrirá un error NoSuchElementException
             if (this.iterador == null) {
                 throw new NoSuchElementException();
             }
+            /*
+             * En otro caso se guarda la entrada
+             * siguiente del iterador; si el iterador ya no tiene siguiente elemento se
+             * buscará la siguiente entrada en el arreglo con una lista distinta de ⌀ y se
+             * actualizará el iterador al iterador de esa lista. Si ya no hay entradas en
+             * el arreglo distintas de ⌀, haremos el iterador ⌀.
+             */
+
             Entrada entrada = this.iterador.next();
             if (!(this.iterador.hasNext())) {
                 boolean hayLista = false;
@@ -111,6 +124,13 @@ public class Diccionario<K, V> implements Iterable<V> {
             return siguiente().llave;
         }
     }
+
+    /*
+     * Las clases IteradorLlaves e IteradorValores son básicamente idénticas: ambas
+     * llaman al constructor de Iterador y ambas en su método next() llaman al
+     * método siguiente(). En IteradorLlaves regresaremos la llave de la entrada
+     * regresada y en IteradorValores regresaremos el valor.
+     */
 
     /* Clase interna privada para iteradores de valores. */
     private class IteradorValores extends Iterador
@@ -178,6 +198,14 @@ public class Diccionario<K, V> implements Iterable<V> {
      */
     public Diccionario(int capacidad, Dispersor<K> dispersor) {
         // Aquí va su código.
+        /*
+         * El constructor inicializa el dispersor con el que se recibe. Si la
+         * capacidad recibida es menor que la capacidad mínima la
+         * incrementamos a ésta. Buscamos la primera potencia de 2 que sea
+         * mayor o igual al doble de la capacidad y ésta será la capacidad del
+         * arreglo. No tenemos una variable para la máscara porque es la
+         * capacidad del arreglo menos 1.
+         */
         this.dispersor = dispersor;
         this.entradas = nuevoArreglo(calculaCapacidad(capacidad));
         this.elementos = 0;
@@ -202,6 +230,25 @@ public class Diccionario<K, V> implements Iterable<V> {
      */
     public void agrega(K llave, V valor) {
         // Aquí va su código.
+
+        /*
+         * Si la llave o el valor recibidos son ⌀ ocurre un error.
+         * Sea i la dispersión de la llave con la máscara aplicada; si el i-ésimo
+         * elemento del arreglo es ⌀, creamos una lista de entradas y la ponemos
+         * en el índice i del arreglo. Agregamos una nueva entrada con la llave y
+         * el valor en esta lista e incrementamos el contador de elementos.
+         * Si la lista en i sí existe, la recorremos para ver si existe una entrada con
+         * la misma llave. Si éste es el caso, reemplazamos el valor de la entrada
+         * con el nuevo valor. Si no es el caso, agregamos una nueva entrada con
+         * la llave y el valor a la lista e incrementamos el contador de elementos.
+         * Si la carga del diccionario alcanza o excede la carga máxima,
+         * doblamos la capacidad del arreglo. Hay que volver a agregar todas las
+         * entradas; no funciona nada más copiar las listas del viejo arreglo al
+         * nuevo, porque al cambiar la capacidad también cambia la máscara y
+         * entonces cada llave queda en entradas potencialmente distintas del
+         * arreglo.
+         */
+
         if (llave == null || valor == null) {
             throw new IllegalArgumentException();
         }
@@ -259,6 +306,14 @@ public class Diccionario<K, V> implements Iterable<V> {
      */
     public V get(K llave) {
         // Aquí va su código.
+
+        /*
+         * Si la llave es ⌀ ocurre un error.
+         * Sea i la dispersión de la llave con la máscara aplicada; si el i-ésimo
+         * elemento del arreglo es ⌀, ocurre un error. Si no buscamos la entrada en
+         * la lista con una llave igual a la recibida.
+         */
+
         if (llave == null) {
             throw new IllegalArgumentException();
         }
@@ -273,6 +328,7 @@ public class Diccionario<K, V> implements Iterable<V> {
                 return entrada.valor;
             }
         }
+        //si la encontramos regresamos si no damos un error.
         throw new NoSuchElementException();
     }
 
@@ -335,13 +391,13 @@ public class Diccionario<K, V> implements Iterable<V> {
      */
     public int colisiones() {
         // Aquí va su código.
-        int contadorCoalisiones = 0;
+        int cuentaColisiones = 0;
         for (int i = 0; i < this.entradas.length; i++) {
             if (this.entradas[i] != null && this.entradas[i].getLongitud() > 0) {
-                contadorCoalisiones += this.entradas[i].getLongitud() - 1;
+                cuentaColisiones += this.entradas[i].getLongitud() - 1;
             }
         }
-        return contadorCoalisiones;
+        return cuentaColisiones;
     }
 
     /**
@@ -403,9 +459,9 @@ public class Diccionario<K, V> implements Iterable<V> {
      */
     public void limpia() {
         // Aquí va su código.
-        Lista<Entrada>[] limpiado = nuevoArreglo(this.entradas.length);
+        Lista<Entrada>[] yaLimpio = nuevoArreglo(this.entradas.length);
         this.elementos = 0;
-        this.entradas = limpiado;
+        this.entradas = yaLimpio;
     }
 
     /**

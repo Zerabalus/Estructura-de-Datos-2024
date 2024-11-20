@@ -58,7 +58,7 @@
     <property name="sun.cpu.endian" value="little"/>
     <property name="sun.stdout.encoding" value="UTF-8"/>
   </properties>
-  <testcase classname="mx.unam.ciencias.edd.test.TestFabricaDispersores" name="testDispersorCadenaDJB" time="0.002"/>
-  <testcase classname="mx.unam.ciencias.edd.test.TestFabricaDispersores" name="testDispersorCadenaXOR" time="0.001"/>
+  <testcase classname="mx.unam.ciencias.edd.test.TestFabricaDispersores" name="testDispersorCadenaDJB" time="0.001"/>
+  <testcase classname="mx.unam.ciencias.edd.test.TestFabricaDispersores" name="testDispersorCadenaXOR" time="0.002"/>
   <testcase classname="mx.unam.ciencias.edd.test.TestFabricaDispersores" name="testDispersorCadenaBJ" time="0.001"/>
 </testsuite>
