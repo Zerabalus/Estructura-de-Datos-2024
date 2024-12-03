@@ -28,6 +28,7 @@ public class MonticuloArreglo<T extends Comparable<T>>
      */
     public MonticuloArreglo(Coleccion<T> coleccion) {
         // Aquí va su código.
+        this(coleccion, coleccion.getElementos());
     }
 
     /**
@@ -38,6 +39,29 @@ public class MonticuloArreglo<T extends Comparable<T>>
      */
     public MonticuloArreglo(Iterable<T> iterable, int n) {
         // Aquí va su código.
+        arreglo = nuevoArreglo(n);
+        int i=0;
+        for(T elem : iterable){
+            agrega(i++, elem);
+        }
+
+        elementos = i;
+    }
+
+    //De la implementacion previa
+    private void agrega(int indice, T elemento){
+        arreglo[indice] = elemento;
+    }
+
+    private void intercambiar(int indice1, int indice2){
+        //Obtenemos los elementos
+        T elem2 = arreglo[indice2];
+        T elem1 = arreglo[indice1];
+
+        //Intercambio en el arreglo
+        arreglo[indice1] = elem2;
+        arreglo[indice2] = elem1;
+
     }
 
     /**
@@ -47,6 +71,28 @@ public class MonticuloArreglo<T extends Comparable<T>>
      */
     @Override public T elimina() {
         // Aquí va su código.
+        if(elementos==0)
+            throw new IllegalStateException();
+
+        Diccionario<T, Integer> indices = new Diccionario<>();
+        T minimo = null;
+        int index = 0;
+
+        for (T elemento : arreglo){
+            if(elemento != null)
+                indices.agrega(elemento, index);
+            index++;
+            if (minimo == null && elemento != null)
+                minimo = elemento;
+            else if (elemento != null && elemento.compareTo(minimo) <= 0)
+                minimo = elemento;
+        }
+
+        arreglo[indices.get(minimo).intValue()] = null;
+        elementos--;
+
+        return minimo;
+
     }
 
     /**
@@ -58,6 +104,10 @@ public class MonticuloArreglo<T extends Comparable<T>>
      */
     @Override public T get(int i) {
         // Aquí va su código.
+        if(i < 0 || i>= elementos)
+            throw new NoSuchElementException();
+
+        return (arreglo[i]);
     }
 
     /**
@@ -67,6 +117,7 @@ public class MonticuloArreglo<T extends Comparable<T>>
      */
     @Override public boolean esVacia() {
         // Aquí va su código.
+        return elementos == 0;
     }
 
     /**
@@ -75,5 +126,6 @@ public class MonticuloArreglo<T extends Comparable<T>>
      */
     @Override public int getElementos() {
         // Aquí va su código.
+        return elementos;
     }
 }

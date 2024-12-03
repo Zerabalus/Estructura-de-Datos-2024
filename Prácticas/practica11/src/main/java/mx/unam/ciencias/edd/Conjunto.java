@@ -15,6 +15,7 @@ public class Conjunto<T> implements Coleccion<T> {
      */
     public Conjunto() {
         // Aquí va su código.
+        conjunto = new Diccionario<T, T>();
     }
 
     /**
@@ -23,6 +24,7 @@ public class Conjunto<T> implements Coleccion<T> {
      */
     public Conjunto(int n) {
         // Aquí va su código.
+        conjunto = new Diccionario<T, T>(n);
     }
 
     /**
@@ -32,6 +34,7 @@ public class Conjunto<T> implements Coleccion<T> {
      */
     @Override public void agrega(T elemento) {
         // Aquí va su código.
+        conjunto.agrega(elemento, elemento);
     }
 
     /**
@@ -42,6 +45,7 @@ public class Conjunto<T> implements Coleccion<T> {
      */
     @Override public boolean contiene(T elemento) {
         // Aquí va su código.
+        return elemento != null && conjunto.contiene(elemento);
     }
 
     /**
@@ -50,6 +54,8 @@ public class Conjunto<T> implements Coleccion<T> {
      */
     @Override public void elimina(T elemento) {
         // Aquí va su código.
+        if (conjunto.contiene(elemento))
+            conjunto.elimina(elemento);
     }
 
     /**
@@ -59,6 +65,7 @@ public class Conjunto<T> implements Coleccion<T> {
      */
     @Override public boolean esVacia() {
         // Aquí va su código.
+        return conjunto.esVacia();
     }
 
     /**
@@ -67,6 +74,7 @@ public class Conjunto<T> implements Coleccion<T> {
      */
     @Override public int getElementos() {
         // Aquí va su código.
+        return conjunto.getElementos();
     }
 
     /**
@@ -74,6 +82,7 @@ public class Conjunto<T> implements Coleccion<T> {
      */
     @Override public void limpia() {
         // Aquí va su código.
+        conjunto.limpia();
     }
 
     /**
@@ -83,6 +92,11 @@ public class Conjunto<T> implements Coleccion<T> {
      */
     public Conjunto<T> interseccion(Conjunto<T> conjunto) {
         // Aquí va su código.
+        Conjunto<T> interseccion = new Conjunto<T>();
+        for (T elemento : this)
+            if (conjunto.contiene(elemento))
+                interseccion.agrega(elemento);
+        return interseccion;
     }
 
     /**
@@ -92,6 +106,12 @@ public class Conjunto<T> implements Coleccion<T> {
      */
     public Conjunto<T> union(Conjunto<T> conjunto) {
         // Aquí va su código.
+        Conjunto<T> union = new Conjunto<T>();
+        for (T elemento : this)
+            union.agrega(elemento);
+        for (T elemento : conjunto)
+            union.agrega(elemento);
+        return union;
     }
 
     /**
@@ -100,6 +120,14 @@ public class Conjunto<T> implements Coleccion<T> {
      */
     @Override public String toString() {
         // Aquí va su código.
+        int c = 0;
+        String r = "{ ";
+        for (T elemento : conjunto) {
+            r += elemento.toString();
+            if (c++ < conjunto.getElementos() - 1)
+                r += ", ";
+        }
+        return r + " }";
     }
 
     /**
@@ -113,6 +141,7 @@ public class Conjunto<T> implements Coleccion<T> {
             return false;
         @SuppressWarnings("unchecked") Conjunto<T> c = (Conjunto<T>)o;
         // Aquí va su código.
+        return conjunto.equals(c.conjunto);
     }
 
     /**
@@ -121,5 +150,6 @@ public class Conjunto<T> implements Coleccion<T> {
      */
     @Override public Iterator<T> iterator() {
         // Aquí va su código.
+        return conjunto.iterator();
     }
 }
