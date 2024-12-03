@@ -23,6 +23,7 @@ public abstract class MeteSaca<T> {
          */
         public Nodo(T elemento) {
             // Aquí va su código.
+            this.elemento = elemento;
         }
     }
 
@@ -44,6 +45,17 @@ public abstract class MeteSaca<T> {
      */
     public T saca() {
         // Aquí va su código.
+        if(esVacia()){
+            throw new NoSuchElementException();
+        }
+        T n = cabeza.elemento;
+        if(cabeza.siguiente == null){
+            cabeza = null;
+            rabo = null;
+            return n;
+        }
+        cabeza = cabeza.siguiente;
+        return n;
     }
 
     /**
@@ -54,6 +66,10 @@ public abstract class MeteSaca<T> {
      */
     public T mira() {
         // Aquí va su código.
+        if (esVacia()) {
+            throw new NoSuchElementException();
+        }
+        return cabeza.elemento;
     }
 
     /**
@@ -63,6 +79,7 @@ public abstract class MeteSaca<T> {
      */
     public boolean esVacia() {
         // Aquí va su código.
+        return (cabeza == null);
     }
 
     /**
@@ -77,5 +94,31 @@ public abstract class MeteSaca<T> {
             return false;
         @SuppressWarnings("unchecked") MeteSaca<T> m = (MeteSaca<T>)object;
         // Aquí va su código.
+        if (m.esVacia()) {
+            if (this.esVacia()) {
+                return true;
+            } else {
+                return false;
+            }
+        } else if (this.esVacia()) {
+            return false;
+        }
+
+        Nodo nodo1 = this.cabeza;
+        Nodo nodo2 = m.cabeza;
+
+        while (nodo1 != null && nodo2 != null) {
+            if (!nodo1.elemento.equals(nodo2.elemento)) {
+                return false;
+            }
+
+            nodo1 = nodo1.siguiente;
+            nodo2 = nodo2.siguiente;
+        }
+
+        if (nodo1 != null || nodo2 != null) {
+            return false;
+        }
+        return true;
     }
 }

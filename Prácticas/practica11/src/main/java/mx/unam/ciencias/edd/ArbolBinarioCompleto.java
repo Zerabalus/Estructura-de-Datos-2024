@@ -1,6 +1,7 @@
 package mx.unam.ciencias.edd;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 /**
  * <p>Clase para árboles binarios completos.</p>
@@ -19,16 +20,28 @@ public class ArbolBinarioCompleto<T> extends ArbolBinario<T> {
         /* Inicializa al iterador. */
         private Iterador() {
             // Aquí va su código.
+            this.cola = new Cola<Vertice>();
+            if(!esVacia())
+            this.cola.mete(raiz);
         }
 
         /* Nos dice si hay un elemento siguiente. */
         @Override public boolean hasNext() {
             // Aquí va su código.
+            return (!cola.esVacia());
         }
 
         /* Regresa el siguiente elemento en orden BFS. */
         @Override public T next() {
             // Aquí va su código.
+            if (!hasNext()) throw new NoSuchElementException();
+                Vertice v = cola.saca();
+            if (v.hayIzquierdo())
+                cola.mete(v.izquierdo);
+            if (v.hayDerecho())
+                cola.mete(v.derecho);
+            return v.elemento;
+            
         }
     }
 
@@ -57,6 +70,34 @@ public class ArbolBinarioCompleto<T> extends ArbolBinario<T> {
      */
     @Override public void agrega(T elemento) {
         // Aquí va su código.
+        if (elemento == null) {
+            throw new IllegalArgumentException();
+        }
+        Vertice v = nuevoVertice(elemento);
+        elementos++;
+        if (raiz == null) {
+            raiz = v;
+        } else {
+            Cola<Vertice> cola = new Cola<Vertice>();
+            cola.mete(raiz);
+            while(!(cola.esVacia())) {
+                Vertice i = cola.saca();
+                if (i.hayIzquierdo()) {
+                    cola.mete(i.izquierdo);
+                } else if (!(i.hayIzquierdo())) {
+                    i.izquierdo = v;
+                    v.padre = i;
+                    return;
+                }
+                if (i.hayDerecho()) {
+                    cola.mete(i.derecho);
+                } else if (!(i.hayDerecho())) {
+                    i.derecho = v;
+                    v.padre = i;
+                    return;
+                }
+            }
+        }
     }
 
     /**
@@ -67,6 +108,40 @@ public class ArbolBinarioCompleto<T> extends ArbolBinario<T> {
      */
     @Override public void elimina(T elemento) {
         // Aquí va su código.
+        //ayudantía liz
+        Vertice eliminar = (ArbolBinario<T>.Vertice) busca(elemento);
+        if (eliminar == null) {
+            return;
+        }
+        elementos = elementos - 1;
+        if (elementos == 0) {
+            raiz = null;
+            return;
+        }
+        Cola<Vertice> cola = new Cola<Vertice>();
+        Vertice v = raiz;
+        cola.mete(v);
+        while (!(cola.esVacia())) {
+            Vertice e = cola.saca();
+            if (!(e.hayDerecho()) && !(e.hayIzquierdo()) && cola.esVacia()) {
+                v = e;
+            }
+            if (e.hayIzquierdo()) {
+                cola.mete(e.izquierdo);
+            }
+            if (e.hayDerecho()) {
+                cola.mete(e.derecho);
+            }
+        }
+        T elimina = v.elemento;
+        v.elemento = eliminar.elemento;
+        eliminar.elemento = elimina;
+        if (v.padre.izquierdo.elemento.equals(elemento)) {
+            v.padre.izquierdo = null;
+        } else {
+            v.padre.derecho = null;
+        }
+        v.padre = null;
     }
 
     /**
@@ -76,6 +151,8 @@ public class ArbolBinarioCompleto<T> extends ArbolBinario<T> {
      */
     @Override public int altura() {
         // Aquí va su código.
+        if (elementos == 0) return -1;
+        return raiz.altura();
     }
 
     /**
@@ -85,6 +162,19 @@ public class ArbolBinarioCompleto<T> extends ArbolBinario<T> {
      */
     public void bfs(AccionVerticeArbolBinario<T> accion) {
         // Aquí va su código.
+        if (raiz == null) {
+            return;
+        }
+        Cola<Vertice> cola = new Cola<>();
+        cola.mete(raiz);
+        while(!cola.esVacia()){
+            Vertice v = cola.saca();
+            accion.actua(v);
+            if(v.hayIzquierdo())
+                cola.mete(vertice(v.izquierdo()));
+            if(v.hayDerecho())
+                cola.mete(vertice(v.derecho()));
+        }
     }
 
     /**
