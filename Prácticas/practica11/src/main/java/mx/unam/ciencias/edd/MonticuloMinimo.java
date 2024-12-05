@@ -139,6 +139,8 @@ public class MonticuloMinimo<T extends Comparable<T>>
         //Intercambio en el arreglo
         arbol[indice1] = elem2;
         arbol[indice2] = elem1;
+
+
     }
 
     /**
@@ -159,7 +161,6 @@ public class MonticuloMinimo<T extends Comparable<T>>
         agrega(elementos, elemento);
         elementos++;
         monticulearArriba(elementos-1);
-        
     }
 
     /**
@@ -226,7 +227,7 @@ public class MonticuloMinimo<T extends Comparable<T>>
      */
     @Override public boolean esVacia() {
         // Aquí va su código.
-        return elementos == 0;
+        return (elementos == 0);
     }
 
     /**
@@ -310,6 +311,7 @@ public class MonticuloMinimo<T extends Comparable<T>>
                 return false;
 
         return true;
+
     }
 
     /**
@@ -341,5 +343,6 @@ public class MonticuloMinimo<T extends Comparable<T>>
         }
 
         return salida;
+        
     }
 }

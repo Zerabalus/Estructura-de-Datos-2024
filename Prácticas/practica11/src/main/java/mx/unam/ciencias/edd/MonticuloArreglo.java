@@ -93,6 +93,8 @@ public class MonticuloArreglo<T extends Comparable<T>>
 
         return minimo;
 
+
+
     }
 
     /**
@@ -108,6 +110,7 @@ public class MonticuloArreglo<T extends Comparable<T>>
             throw new NoSuchElementException();
 
         return (arreglo[i]);
+
     }
 
     /**
@@ -117,7 +120,7 @@ public class MonticuloArreglo<T extends Comparable<T>>
      */
     @Override public boolean esVacia() {
         // Aquí va su código.
-        return elementos == 0;
+        return (elementos == 0);
     }
 
     /**
