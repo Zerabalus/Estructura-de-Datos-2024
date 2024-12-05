@@ -120,14 +120,17 @@ public class Conjunto<T> implements Coleccion<T> {
      */
     @Override public String toString() {
         // Aquí va su código.
-        int c = 0;
-        String r = "{ ";
+        String s = "{ ";
+        int i = 0, n = this.getElementos() - 1;
         for (T elemento : conjunto) {
-            r += elemento.toString();
-            if (c++ < conjunto.getElementos() - 1)
-                r += ", ";
+            s += elemento.toString();
+            if (i++ < n) {
+                s += ", ";
+            }
         }
-        return r + " }";
+        s += " }";
+        return s;
+
     }
 
     /**

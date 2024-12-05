@@ -44,10 +44,16 @@ public class ArbolAVL<T extends Comparable<T>>
             /* 16.2 del libro: Además de la representación en cadena del elemento en el vértice,
             también le concatenaremos la altura del vértice, una diagonal y el
             balance de vértice, que será la diferencia de las alturas de sus hijos. */
-            return toStringAux(this);
+            return elemento.toString() + " "  + altura+"/"+balanceVertice(this);
         }
-        private String toStringAux(VerticeAVL vertice){
-            return vertice.elemento.toString()+" "+vertice.altura()+"/"+balance(vertice);
+
+        //este método estaba causando el error de los toString
+
+        private int balanceVertice(Vertice vertice){
+            int alturaIzq = vertice.hayIzquierdo() ? ((VerticeAVL)vertice.izquierdo).altura : -1;
+            int alturaDer = vertice.hayDerecho() ? ((VerticeAVL)vertice.derecho).altura : -1;
+    
+            return alturaIzq-alturaDer;
         }
     
 
