@@ -35,7 +35,7 @@ al ejecutar:
 ```
 $ mvn install
 ...
-$ java -jar target/practica11.jar N
+$ java -jar v/practica11.jar N
 ```
 
 Donde `N` es un número entero.

@@ -72,7 +72,9 @@ public class ArbolRojinegro<T extends Comparable<T>>
      * Constructor sin parámetros. Para no perder el constructor sin parámetros
      * de {@link ArbolBinarioOrdenado}.
      */
-    public ArbolRojinegro() { super(); }
+    public ArbolRojinegro() { 
+        super(); 
+    }
 
     /**
      * Construye un árbol rojinegro a partir de una colección. El árbol
@@ -105,8 +107,8 @@ public class ArbolRojinegro<T extends Comparable<T>>
      */
     public Color getColor(VerticeArbolBinario<T> vertice) {
         // Aquí va su código.
-        VerticeRojinegro rjn=(VerticeRojinegro) vertice;
-        return rjn.color;
+        VerticeRojinegro colorRojinegro=(VerticeRojinegro) vertice;
+        return colorRojinegro.color;
     }
 
     /**

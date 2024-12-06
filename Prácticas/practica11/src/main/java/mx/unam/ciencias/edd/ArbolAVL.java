@@ -47,8 +47,6 @@ public class ArbolAVL<T extends Comparable<T>>
             return elemento.toString() + " "  + altura+"/"+balanceVertice(this);
         }
 
-        //este método estaba causando el error de los toString
-
         private int balanceVertice(Vertice vertice){
             int alturaIzq = vertice.hayIzquierdo() ? ((VerticeAVL)vertice.izquierdo).altura : -1;
             int alturaDer = vertice.hayDerecho() ? ((VerticeAVL)vertice.derecho).altura : -1;
@@ -72,7 +70,9 @@ public class ArbolAVL<T extends Comparable<T>>
                 return false;
             @SuppressWarnings("unchecked") VerticeAVL vertice = (VerticeAVL)objeto;
             // Aquí va su código.
-            return (altura == vertice.altura && super.equals(objeto));
+            if(altura != vertice.altura)
+                return false;
+            return super.equals(objeto);
         }
     }
 
